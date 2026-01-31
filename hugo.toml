@@ -1,0 +1,19 @@
+languageCode = 'en-us'
+title = 'BCI Essentials Docs'
+
+disableKinds = ['home', 'taxonomy', 'term', 'rss']
+uglyUrls = true
+cleanDestinationDir = true
+disableFastRender = true
+minify = true
+
+[params]
+    description = 'Documentation of the BCI Essentials - a set of tools for developing BCI-enabled Unity applications with Python data processing.'
+
+[markup.goldmark.renderHooks.link]
+    useEmbedded = 'fallback'
+[markup.goldmark.renderHooks.image]
+    useEmbedded = 'fallback'
+
+[markup.highlight]
+    style='rrt'
