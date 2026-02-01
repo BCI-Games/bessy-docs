@@ -43,11 +43,14 @@ body {
         }
 
         > ul > li > a { font-size: larger }
-
-        @media (max-width:800px) { display: none }
     }
 
     main { padding: 4ch 0 0 4ch }
+
+    @media (max-width:800px) {
+        > nav { display: none }
+        main { padding: 0 }
+    }
 }
 
 
@@ -60,6 +63,15 @@ nav ol {
         content: "/";
         padding: 1ch;
     }
+}
+
+img {
+    display: block;
+
+    max-width: 100%;
+    max-height: 30em;
+
+    margin: auto;
 }
 
 a { color: var(--accent-colour) }
