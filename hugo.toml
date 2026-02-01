@@ -1,10 +1,9 @@
 languageCode = 'en-us'
 title = 'BCI Essentials Docs'
 
-disableKinds = ['home', 'taxonomy', 'term', 'rss']
+disableKinds = ['taxonomy', 'term', 'rss']
 uglyUrls = true
 cleanDestinationDir = true
-disableFastRender = true
 minify = true
 
 [params]
