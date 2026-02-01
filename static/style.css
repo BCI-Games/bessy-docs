@@ -66,3 +66,4 @@ a { color: var(--accent-colour) }
 :visited { color: var(--secondary-accent-colour) }
 
 ul ul { padding-left: 2ch }
+li { margin-block: 1ch }
