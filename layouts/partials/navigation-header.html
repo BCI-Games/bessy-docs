@@ -1,0 +1,17 @@
+{{ if not .IsHome }}
+<header>
+    {{ .Site.Title }}
+    <nav>
+        <ol>
+            <li><a href="/">Home</a></li>
+            {{ range after 1 .Ancestors.Reverse }}
+                <li>
+                    <a href="{{ .RelPermalink }}">
+                        {{ partial "page-title" . }}
+                    </a>
+                </li>
+            {{ end }}
+        </ol>
+    </nav>
+</header>
+{{ end }}

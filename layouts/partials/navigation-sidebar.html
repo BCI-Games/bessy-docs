@@ -1,0 +1,16 @@
+{{ $page_path := .Path}}
+{{ $ancestors := .Ancestors }}
+
+<nav>
+    <a href="/">Bessy</a>
+    <ul>
+        {{ range .Site.Sections }}
+            <li>
+                <a href="{{.RelPermalink}}">
+                    {{ partial "page-title" . }}
+                </a>
+                {{ partial "section-hierarchy-links" (dict "section" . "page" $) }}
+            </li>
+        {{ end }}
+    </ul>
+</nav>

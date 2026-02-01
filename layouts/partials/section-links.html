@@ -1,0 +1,11 @@
+<ul>
+    {{ range .Sections }}
+    <li>
+        <a href="{{.RelPermalink}}">
+            {{ partial "page-title" . }}
+        </a>
+        {{ partial "section-links" . }}
+    </li>
+    {{ end }}
+    {{ partial "section-page-links" . }}
+</ul>

@@ -1,0 +1,12 @@
+{{ $page_title := "" }}
+
+{{ if .IsHome }}
+    {{ $page_title = .Site.Title }}
+{{ else if .Title }}
+    {{ $page_title = .Title }}
+{{ else }}
+    {{ $base_name := path.BaseName .Path }}
+    {{ $page_title = title (replace $base_name "-" " ") }}
+{{ end }}
+
+{{ return $page_title }}
