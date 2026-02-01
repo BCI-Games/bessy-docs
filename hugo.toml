@@ -1,5 +1,5 @@
 languageCode = 'en-us'
-title = 'BCI Essentials Docs'
+title = 'BCI Essentials Documentation'
 
 disableKinds = ['taxonomy', 'term', 'rss']
 uglyUrls = true
