@@ -1,0 +1,68 @@
+html {
+    display: flex;
+    font-size: 16px;
+
+    @media (prefers-color-scheme: light) {
+        --main-colour: #000;
+        --bg-colour: #fff;
+        --accent-colour: #44f;
+        --secondary-accent-colour: #518;
+    }
+    @media (prefers-color-scheme: dark) {
+        --main-colour: #fff;
+        --bg-colour: #222;
+        --accent-colour: #bbf;
+        --secondary-accent-colour: #97a;
+    }
+
+    color: var(--main-colour);
+    background-color: var(--bg-colour);
+}
+
+body {
+    display: flex;
+
+    width: 1200px;
+    min-height: calc(100vh - 4ch);
+
+    margin: auto;
+    padding: 2ch;
+    font-size: 16px;
+
+    > nav {
+        min-width: 300px;
+        padding-block: 2em;
+
+        border: solid 1ch;
+
+        > a {
+            display: flex;
+            justify-content: center;
+
+            font-size: 2em;
+        }
+
+        > ul > li > a { font-size: larger }
+
+        @media (max-width:800px) { display: none }
+    }
+
+    main { padding: 4ch 0 0 4ch }
+}
+
+
+nav ol {
+    display: flex;
+    list-style: none;
+    gap: 0;
+
+    li::after {
+        content: "/";
+        padding: 1ch;
+    }
+}
+
+a { color: var(--accent-colour) }
+:visited { color: var(--secondary-accent-colour) }
+
+ul ul { padding-left: 2ch }
