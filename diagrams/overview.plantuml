@@ -1,0 +1,74 @@
+@startuml overview
+!theme plain
+title
+Essential Class Overview
+end title
+
+namespace Behaviours {
+    class BCIController extends MarkerComponentProvider {
+        StartTrial()
+        InterruptTrial()
+        StartTraining()
+        InterruptTraining()
+    }
+
+    class MarkerComponentProvider {
+        # ProvideMarkerComponentsToChildren()
+        UpdateClassifier()
+    }
+
+    namespace Trialing {
+        abstract TrialBehaviour {
+            # int? TrainingTarget
+            void StartTestingTrial()
+            void StartTrainingTrial()
+            void ClearTrainingTarget()
+        }
+    }
+
+    namespace Training {
+        abstract TrainingBehaviour
+    }
+
+    BCIController --> TrialBehaviour
+    BCIController --> TrainingBehaviour
+
+    namespace Selection {
+        interface ISelector {
+            void MakeSelection(int)
+        }
+    }
+    MarkerComponentProvider ..> ISelector
+}
+
+namespace LSLFramework {
+    class LSLMarkerWriter {
+        PushTrialStartedMarker()
+        PushTrainingCompleteMarker()
+        ...
+        ..
+        PushMITrainingMarker(...)
+        PushSSVEPClassificationMarker(...)
+        ...
+    }
+
+    class LSLResponseProvider {
+        float PollingPeriod
+        --
+        SubscribePredictions(callback)
+        ...
+        Unsubscribe(callback)
+        ...
+    }
+}
+
+MarkerComponentProvider o-- LSLMarkerWriter
+MarkerComponentProvider o-- LSLResponseProvider
+
+TrialBehaviour --> LSLMarkerWriter
+TrainingBehaviour --> LSLMarkerWriter
+
+abstract Stimulus.Presentation.StimulusPresentationBehaviour
+TrialBehaviour --> StimulusPresentationBehaviour
+
+@enduml

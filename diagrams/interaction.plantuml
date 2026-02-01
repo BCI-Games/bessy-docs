@@ -1,0 +1,40 @@
+@startuml interaction
+!theme plain
+title
+System Interaction
+end title
+
+actor User
+
+cloud "Lab Streaming Layer" as lsl {
+    card "Unity Marker Stream" as marker_stream
+    card "Python Response" as response_stream
+}
+
+node "BCI Essentials Python" as bessy_py
+marker_stream --> bessy_py
+bessy_py --> response_stream : predictions
+
+node "BCI Essentials Unity" as bessy_u {
+    component "Marker Writer" as mw
+    component "Response Provider" as rp
+}
+mw --> marker_stream : "event markers"
+mw --> marker_stream : "command markers"
+
+response_stream --> rp
+
+node "Unity Application" {
+    component "Game Logic" as logic
+    interface "Stimulus Presentation" as presentation
+
+    logic -- presentation
+}
+
+logic --> mw
+rp --> logic
+
+
+presentation --> User
+
+@enduml

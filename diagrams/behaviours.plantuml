@@ -1,0 +1,71 @@
+@startuml behaviours
+!theme plain
+title
+Base Behaviour Classes
+end title
+
+together {
+    interface Selection.ISelector {
+        void MakeSelection(int)
+    }
+
+    interface Behaviours.IBCIMarkerSource {
+        LSLMarkerWriter MarkerWriter
+    }
+}
+
+namespace Behaviours {
+    abstract CoroutineBehaviour {
+        bool IsRunning
+        --
+        void Begin()
+        void Interrupt()
+        IEnumerator AwaitCompletion()
+        ..
+        {abstract} # IEnumerator Run()
+        {abstract} # void SetUp()
+        {abstract} # void CleanUp()
+    }
+    note top
+        Base class for training and trial behaviours,
+        providing clear routine structure and utilities
+    end note
+
+    class MarkerComponentProvider {
+        # LSLMarkerWriter MarkerWriter
+        # LSLResponseProvider ResponseProvider
+        # void ProvideMarkerComponentsToChildren()
+        void UpdateClassifier()
+    }
+    note top
+        Fetches or creates LSL framework components,
+        providing them to any children implementing
+        the IBCIMarkerSource or ISelector interfaces
+    end note
+    MarkerComponentProvider ..> IBCIMarkerSource::MarkerWriter
+    MarkerComponentProvider ..> ISelector::MakeSelection
+
+    class BCIController extends MarkerComponentProvider {
+        bool IsRunningTrial
+        bool IsRunningTraining
+        ..serialized fields..
+        - TrialBehaviour _trialBehaviour
+        - TrainingBehaviour _trainingBehaviour
+        --
+        void StartTrial()
+        void InterruptTrial()
+        void StartTraining()
+        void InterruptTraining()
+    }
+
+    class BCIControllerShortcuts {
+        KeyBind ToggleTrialRunBinding
+        KeyBind ToggleTrainingRunBinding
+        KeyBind UpdateClassifierBinding
+        ..serialized fields..
+        - BCIController _target
+    }
+    BCIControllerShortcuts --> BCIController
+}
+
+@enduml

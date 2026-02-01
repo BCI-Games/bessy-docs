@@ -1,0 +1,30 @@
+@startuml selection
+!theme plain
+
+namespace Selection {
+    interface ISelector {
+        void MakeSelection(int)
+    }
+
+    abstract SelectionBehaviour implements ISelector
+
+    interface ISelectable {
+        bool IsSelectable
+        void Select()
+    }
+
+    class SelectorShortcuts {
+        IndexedKeyBindSet Bindings
+        ..serialized fields..
+        - SelectionBehaviour _target
+        - TrialBehaviour _trialBehaviour
+    }
+
+    note as Note
+        A brief collection of structural skeletons
+        enabling operability with training behaviours
+        without imposing opinionated selection logic
+    end note
+}
+
+@enduml

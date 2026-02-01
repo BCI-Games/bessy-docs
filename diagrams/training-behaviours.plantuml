@@ -1,0 +1,64 @@
+@startuml training-behaviours
+!theme plain
+title
+Training Behaviours
+end title
+
+namespace Selection {
+    interface ISelector {
+        void MakeSelection(int)
+    }
+    abstract SelectionBehaviour implements ISelector
+}
+
+namespace Behaviours {
+    circle CoroutineBehaviour
+
+    interface Behaviours.IBCIMarkerSource {
+        LSLMarkerWriter MarkerWriter
+    }
+
+    namespace Trialing {
+        circle TrialBehaviour
+    }
+}
+
+namespace Behaviours.Training {
+    abstract TrainingBehaviour extends Behaviours.CoroutineBehaviour implements Behaviours.IBCIMarkerSource
+    abstract TargetIndicationBehaviour extends .Selection.SelectionBehaviour {
+        {abstract} int OptionCount
+        {abstract} void MakeSelection(int)
+        {abstract} void BeginTargetIndication(int)
+        {abstract} void EndTargetIndication()
+    }
+    interface ITargetable {
+        void StartTargetIndication()
+        void EndTargetIndication()
+    }
+    TargetIndicationBehaviour::BeginTargetIndication ..> ITargetable::StartTargetIndication
+
+    class SingleRoundTrainingBehaviour extends TrainingBehaviour {
+        int TargetIndex
+        float TargetIndicationPeriod
+        bool PersistTargetIndication
+        float PreTrialTime
+        float PostTrialTime
+        bool SelectTrainingTarget
+        float TargetSelectionDisplayPeriod
+        float RestTime
+        IEnumerator RunRound(int)
+    }
+    SingleRoundTrainingBehaviour --> TargetIndicationBehaviour
+    SingleRoundTrainingBehaviour --> .Behaviours.Trialing.TrialBehaviour
+
+    class AutomatedTrainingBehaviour extends SingleRoundTrainingBehaviour {
+        int SelectionCount
+    }
+
+    class IterativeTrainingBehaviour extends AutomatedTrainingBehaviour {
+        int SelectionsBeforeTraining
+        int SelectionsBetweenTraining
+    }
+}
+
+@enduml

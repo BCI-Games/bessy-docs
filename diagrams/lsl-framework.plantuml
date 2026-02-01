@@ -1,0 +1,162 @@
+@startuml lsl-framework
+!theme plain
+title
+LSL Framework
+end title
+
+namespace LSLFramework {
+    class LSLStreamReader {
+        string StreamType {"BCI"}
+        {Serialized} bool _openOnStart
+        bool PrintLogs
+        ..properties..
+        int SamplesAvailable
+        bool HasLiveInlet
+        --
+        void OpenStream()
+        void CloseStream()
+        LSLResponse[] PullAllResponses()
+    }
+
+    class LSLResponseProvider extends LSLStreamReader {
+        float PollingPeriod
+        ..properties..
+        bool IsPolling
+        --
+        void SubscribePredictions(Action<LSLPredictionResponse>)
+        void SubscribeAll(Action<LSLResponse>)
+        void Subscribe<T : LSLResponse>(Action<T>)
+        bool UnsubscribePredictions(Action<LSLPredictionResponse>)
+        bool UnsubscribeAll(Action<LSLResponse>)
+        bool Unsubscribe<T : LSLResponse>(Action<T>)
+    }
+
+    note bottom
+        Convenience class providing
+        LSL responses through typed
+        callback subscriptions
+    end note
+
+
+    class LSLStreamWriter {
+        string StreamName {"UnityMarkerStream"}
+        string StreamType {"LSL_Marker_Strings"}
+        bool PrintLogs
+        ..properties..
+        bool HasConsumers
+        --
+        bool OpenStream()
+        void CloseStream()
+        void PushString(string)
+    }
+
+    class LSLMarkerWriter extends LSLStreamWriter {
+        command markers
+        ..
+        void PushTrialStartedMarker()
+        void PushTrialEndsMarker()
+        void PushTrainingCompleteMarker()
+        void PushTrainClassifierMarker()
+        void PushUpdateClassifierMarker()
+        void PushDontWithRestingStateCollectionMarker()
+        void PushCommandMarker<T : ICommandMarker>()
+        --
+        event markers
+        ..
+        void PushMITrainingMarker(...)
+        void PushMIClassificationMarker(...)
+        ..
+        void PushSwitchTrainingMarker(...)
+        void PushSwitchClassificationMarker(...)
+        ..
+        void PushSSVEPTrainingMarker(...)
+        void PushSSVEPClassificationMarker(...)
+        ..
+        void PushTVEPTrainingMarker(...)
+        void PushTVEPClassificationMarker(...)
+        ..
+        void PushSingleFlashP300TrainingMarker(...)
+        void PushSingleFlashP300ClassificationMarker(...)
+        void PushMultiFlashP300TrainingMarker(...)
+        void PushMultiFlashP300ClassificationMarker(...)
+        --
+        void PushMarker(ILSLMarker)
+    }
+
+
+    class LSLStreamResolver {
+        {static} bool TryResolveByType(string, out StreamInfo)
+        {static} bool TryResolveByName(string, out StreamInfo)
+        {static} bool TryResolveByProperty(string, string, StreamInfo)
+        {static} bool TryResolveByPredicate(string, StreamInfo)
+        --
+        {static} IEnumerator RunResolveByType(string, Action<StreamInfo> float)
+        {static} IEnumerator RunResolveByName(string, Action<StreamInfo>, float)
+        {static} IEnumerator RunResolveByProperty(string, string, Action<StreamInfo>, float)
+        {static} IEnumerator RunResolveByPredicate(string, Action<StreamInfo>, float)
+    }
+
+
+    interface ILSLMarker {
+        string MarkerString
+    }
+
+    interface ICommandMarker extends ILSLMarker
+
+    circle "...Specialized Command Markers" as command_markers implements ICommandMarker
+
+    abstract EventMarker implements ILSLMarker {
+        int ObjectCount
+        int TrainingTarget
+    }
+
+    abstract EpochEventMarker extends EventMarker {
+        float EpochLength
+    }
+    class MIEventMarker extends EpochEventMarker
+    class SwitchEventMarker extends EpochEventMarker
+
+    abstract FrequenciesEventMarker extends EpochEventMarker {
+        float[] Frequencies
+    }
+    class SSVEPEventMarker extends FrequenciesEventMarker
+    class TVEPEventMarker extends FrequenciesEventMarker
+
+    abstract P300EventMarker extends EventMarker
+    class SingleFlashP300EventMarker extends P300EventMarker {
+        int ActiveObject
+    }
+    class MultiFlashP300EventMarker extends P300EventMarker {
+        int[] ActiveObjects
+    }
+
+
+    class LSLPredictionResponse extends SingleChannelLSLResponse {
+        int Value
+    }
+    note bottom of LSLPredictionResponse: The only useful response
+
+    class LSLResponse {
+        double CaptureTime
+        string[] RawSampleValues
+        {static} LSLResponse BuildResponse(string[], double)
+        string ToString()
+        bool TryMatchRegex(...)
+    }
+    class EmptyLSLResponse extends LSLResponse
+
+    class SingleChannelLSLResponse extends LSLResponse {
+        {static} LSLResponse Parse(string)
+    }
+    class LSLPing extends SingleChannelLSLResponse
+
+    circle "...Marker Receipts" as marker_receipts extends SingleChannelLSLResponse
+}
+
+
+LSLMarkerWriter --> ILSLMarker
+LSLStreamReader --> LSLResponse
+LSLStreamReader --> LSLStreamResolver
+LSLResponseProvider --> LSLPredictionResponse
+
+@enduml

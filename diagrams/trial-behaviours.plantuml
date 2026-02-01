@@ -1,0 +1,82 @@
+@startuml trial-behaviours
+!theme plain
+title
+Trial Behaviours
+end title
+
+namespace Stimulus {
+    namespace Presentation.Standard {
+        circle ColourToggleStimulusPresenter
+    }
+
+    namespace Collections {
+        circle StimulusPresenterCollection
+    }
+}
+
+namespace Utilities {
+    circle BlackWhiteMatrixFactory
+    circle ContextAwareUtilities    
+    circle RNRAUtilities
+}
+
+namespace Behaviours {
+    circle CoroutineBehaviour
+
+    interface IBCIMarkerSource {
+        LSLMarkerWriter MarkerWriter
+    }
+
+    namespace Trialing {
+        abstract TrialBehaviour extends .Behaviours.CoroutineBehaviour implements .Behaviours.IBCIMarkerSource {
+            bool HasTrainingTarget
+            void StartTestingTrial()
+            void StartTrainingTrial(int)
+            void ClearTrainingTarget()
+        }
+
+        abstract PersistentTrialBehaviour extends TrialBehaviour {
+            int TrainingEpochCount
+            float EpochLength
+            float InterEpochInterval
+            {abstract} void SendTrainingMarker(int)
+            {abstract} void SendClassificationMarker()
+        }
+
+        class SSVEPTrialBehaviour extends PersistentTrialBehaviour {
+            int TargetFrameRate
+            List<FrequencyStimulusPresenter> Presenters
+        }
+
+        namespace P300 {
+            abstract P300TrialBehaviour extends .Behaviours.Trialing.TrialBehaviour {
+                StimulusPresenterCollection PresenterCollection
+                int FlashesPerOption
+                float OnTime
+                float OffTime
+            }
+            P300TrialBehaviour::PresenterCollection -- .Stimulus.Collections.StimulusPresenterCollection
+            P300TrialBehaviour ..> .Stimulus.Presentation.Standard.ColourToggleStimulusPresenter
+
+            class SingleFlashTrialBehaviour extends P300TrialBehaviour
+            SingleFlashTrialBehaviour --> .Utilities.RNRAUtilities
+            class ContextAwareSingleFlashTrialBehaviour extends SingleFlashTrialBehaviour
+            ContextAwareSingleFlashTrialBehaviour --> .Utilities.ContextAwareUtilities
+
+            abstract MultiFlashTrialBehaviour extends P300TrialBehaviour
+            class ContextAwareMultiFlashTrialBehaviour extends MultiFlashTrialBehaviour
+            ContextAwareMultiFlashTrialBehaviour --> .Utilities.ContextAwareUtilities
+
+            abstract GridFlashTrialBehaviour extends MultiFlashTrialBehaviour {
+                int Rows
+                int Columns
+            }
+            class RowColumnFlashTrialBehaviour extends GridFlashTrialBehaviour
+            RowColumnFlashTrialBehaviour --> .Utilities.RNRAUtilities
+            class CheckerboardFlashTrialBehaviour extends GridFlashTrialBehaviour
+            CheckerboardFlashTrialBehaviour --> .Utilities.BlackWhiteMatrixFactory
+        }
+    }
+}
+
+@enduml
