@@ -1,7 +1,0 @@
-{{ range where .RegularPages ".Path" "ne" "/404" }}
-    <li>
-        <a href="{{.RelPermalink}}">
-            {{ partial "page-title" . }}
-        </a>
-    </li>
-{{ end }}

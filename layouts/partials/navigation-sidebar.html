@@ -5,12 +5,32 @@
     <a href="/">Bessy Docs</a>
     <ul>
         {{ range .Site.Sections }}
-            <li>
-                <a href="{{.RelPermalink}}">
-                    {{ partial "page-title" . }}
-                </a>
-                {{ partial "section-hierarchy-links" (dict "section" . "page" $) }}
-            </li>
+            {{ template "hierarchy-links" (dict "section" . "page" $) }}
         {{ end }}
     </ul>
 </nav>
+
+
+{{ define "hierarchy-links" }}
+    {{ $isAncestor := or (.section.IsAncestor .page) (eq .section .page) }}
+    {{ $class := cond $isAncestor "folder open" "folder" }}
+
+    <li class="{{ $class }}">
+        <a href="{{.section.RelPermalink}}">
+            {{ partial "page-title" .section }}
+        </a>
+        {{ if $isAncestor }}
+            {{ $page := .page }}
+            {{ with .section }}
+                <ul>
+                    {{ range .Sections }}
+                        {{ template "hierarchy-links" (dict "section" . "page" $page) }}
+                    {{ end }}
+                    {{ if or (.IsAncestor $page) (eq . $page) }}
+                        {{ partial "section-page-links" . }}
+                    {{ end }}
+                </ul>
+            {{ end }}
+        {{ end }}
+    </li>
+{{ end }}

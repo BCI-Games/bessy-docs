@@ -9,3 +9,14 @@
     {{ end }}
     {{ partial "section-page-links" . }}
 </ul>
+
+
+{{ define "_partials/section-page-links.html" }}
+    {{ range where .RegularPages ".Path" "ne" "/404" }}
+        <li>
+            <a href="{{.RelPermalink}}">
+                {{ partial "page-title" . }}
+            </a>
+        </li>
+    {{ end }}
+{{ end }}
