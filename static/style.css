@@ -2,6 +2,10 @@ html {
     display: flex;
     font-size: 16px;
 
+    --nav-width: 280px;
+    --page-gap: 4ch;
+    --page-height: calc(100vh - 2 * var(--page-gap));
+
     @media (prefers-color-scheme: light) {
         --main-colour: #000;
         --bg-colour: #fff;
@@ -20,20 +24,20 @@ html {
 }
 
 body {
-    display: flex;
-
     width: 1200px;
-    min-height: calc(100vh - 4ch);
+    min-height: var(--page-height);
 
     margin: auto;
-    padding: 2ch;
-    font-size: 16px;
 
     > nav {
-        min-width: 300px;
-        padding-block: 2em;
+        position: fixed;
+        width: calc(var(--nav-width) - 2 * var(--page-gap));
+        height: calc(var(--page-height) - 2 * var(--page-gap));
 
-        border: solid 1ch;
+        margin-block: var(--page-gap);
+        padding: var(--page-gap);
+
+        border-right: solid 2px;
 
         > a {
             display: flex;
@@ -45,11 +49,19 @@ body {
         > ul > li > a { font-size: larger }
     }
 
-    main { padding: 4ch 0 0 4ch }
+    main {
+        max-width: calc(100vw - var(--nav-width) - 2 * var(--page-gap));
+
+        margin-left: var(--nav-width);
+        padding: var(--page-gap);
+    }
 
     @media (max-width:800px) {
         > nav { display: none }
-        main { padding: 0 }
+        main {
+            max-width: calc(100vw - 2 * var(--page-gap));
+            margin: unset;
+        }
     }
 }
 
@@ -78,4 +90,33 @@ a { color: var(--accent-colour) }
 :visited { color: var(--secondary-accent-colour) }
 
 ul ul { padding-left: 2ch }
-li { margin-block: 1ch }
+li { margin-block: 0.5em }
+
+
+table {
+    table-layout: fixed;
+    width: 100%;
+
+    border-collapse: collapse;
+
+    td {
+        padding: 0.25em 1ch;
+
+        word-wrap: anywhere;
+        text-wrap-style: balance;
+
+        border: 2px solid;
+    }
+}
+
+pre {
+    max-width: 100%;
+    padding: 1ch;
+
+    overflow: scroll;
+
+    code {
+        padding: unset;
+        background-color: unset;
+    }
+}
