@@ -10,23 +10,23 @@ cloud "Lab Streaming Layer" as lsl {
     card "Data" as data
 }
 
-node "BCI Essentials Python" as bessy_py
-markers --> bessy_py
-predictions <-- bessy_py
+node "Back End (Python)" as back_end
+markers --> back_end
+predictions <-- back_end
 
-node "BCI Essentials Unity" as bessy_u
-bessy_u --> markers
-bessy_u <-- predictions
+node "Front End (Unity)" as front_end
+front_end --> markers
+front_end <-- predictions
 
 node "EEG Headset" as headset
 data <-- headset
-data --> bessy_py
+data --> back_end
 
 
-node "Unity Application" as app
+node "Application" as app
 
-app .> bessy_u
-app <.[norank]. bessy_u
+app .> front_end
+app <.[norank]. front_end
 
 actor User
 app --> User
