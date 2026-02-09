@@ -89,7 +89,7 @@ img {
 a { color: var(--accent-colour) }
 :visited { color: var(--secondary-accent-colour) }
 
-ul ul { padding-left: 2ch }
+ul { padding-left: 2ch }
 li { margin-block: 0.5em }
 .folder { list-style-type: disclosure-closed }
 .open { list-style-type: disclosure-open }

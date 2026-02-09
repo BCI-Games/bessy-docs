@@ -3,12 +3,10 @@ BCI Essentials *(Bessy)* is a modular software development framework facilitatin
 A processing and classification module *(the "back end")* receives data and communicates with the presentation of stimulus and interaction *(the "front end")* through [Lab Streaming Layer](https://labstreaminglayer.org/). Both a front and back end are required to complete a functional system, though any implementation may be used. The *essential* core of the framework itself is the communication protocol and promises imposed by it.
 
 ## Back Ends
-[BCI Essentials Python](bessy-python)  
-*Python library with template scripts*
+{{<tag-list tag="back_end">}}
 
 ## Front End Toolkits
-[BCI Essentials Unity](bessy-unity)  
-*Unity package implementing routines for training and stimulus presentation*
+{{<tag-list tag="front_end">}}
 
 ![System interaction diagram showing communication between Unity and Python layers through the Lab Streaming Layer communication protocol](interaction.svg)
 
