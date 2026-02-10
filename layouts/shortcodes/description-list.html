@@ -1,0 +1,7 @@
+<dl>
+    {{ range split .Inner "|" }}
+        {{ $term := split . "\n" }}
+        <dt>{{ index $term 1 }}</dt>
+        <dd>{{ index $term 2 }}</dd>
+    {{ end }}
+</dl>
