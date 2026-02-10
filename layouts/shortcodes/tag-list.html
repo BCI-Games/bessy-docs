@@ -1,12 +1,13 @@
 {{ $tag_address := printf "%s.%s" ".Params" (.Get "tag") }}
 {{ $pages := where site.Pages $tag_address true }}
 
-<ul>
+<dl>
 {{ range $pages }}
-    <li>
-        <a href="{{.RelPermalink}}">{{ partial "page-title" . }}</a>
-        <br>
-        <em>{{.Description}}</em>
-    </li>
+    <dt>
+        <a href="{{.RelPermalink}}">
+            {{ partial "page-title" . }}
+        </a>
+    </dt>
+    <dd>{{.Description}}</dd>
 {{ end }}
-</ul>
+</dl>

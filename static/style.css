@@ -91,6 +91,7 @@ a { color: var(--accent-colour) }
 
 ul { padding-left: 2ch }
 li { margin-block: 0.5em }
+dt { font-size: large }
 .folder { list-style-type: disclosure-closed }
 .open { list-style-type: disclosure-open }
 
