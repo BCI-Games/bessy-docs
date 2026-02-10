@@ -150,7 +150,7 @@ namespace LSLFramework {
     }
     class LSLPing extends SingleChannelLSLResponse
 
-    circle "...Marker Receipts" as marker_receipts extends SingleChannelLSLResponse
+    class LSLMarkerReceipt extends SingleChannelLSLResponse
 }
 
 
