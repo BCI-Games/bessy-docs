@@ -20,4 +20,4 @@ BCI Essentials uses [Lab Streaming Layer (LSL)](https://labstreaminglayer.org/) 
     Sequence of targetted trials targetting different objects or classes providing the data and event markers necessary to build a classifier for live inferences.
 {{< /description-list >}}
 
-![Composite diagram illustrating the definitions of the different time window terms defined above](timeline-definitions.png)
+{{< figure-link src="./timeline-definitions.png" alt="Composite diagram illustrating definitions of the different time window terms defined above" >}}
