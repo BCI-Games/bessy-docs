@@ -13,7 +13,7 @@ namespace Selection {
     abstract SelectionBehaviour implements ISelector {
         void MakeSelection(int)
     }
-    SelectionBehaviour::MakeSelection ..> ISelectable::Select
+    SelectionBehaviour::MakeSelection .> ISelectable::Select
 }
 
 namespace Behaviours.Training {
@@ -27,11 +27,15 @@ namespace Behaviours.Training {
         void StartTargetIndication()
         void EndTargetIndication()
     }
+    TargetIndicationBehaviour::BeginTargetIndication .l.> ITargetable::StartTargetIndication
+    TargetIndicationBehaviour::EndTargetIndication .l.> ITargetable::EndTargetIndication
 }
+
+Behaviours -l[hidden]- Selection
 
 namespace Stimulus {
     namespace Collections {
-        class StimulusPresenterCollection extends Behaviours.Training.TargetIndicationBehaviour implements ICollection {
+        class StimulusPresenterCollection extends Behaviours.Training.TargetIndicationBehaviour {
             int OptionCount
             ..serialized fields..
             # List<StimulusPresentationBehaviour> _stimulusPresenters
@@ -67,7 +71,7 @@ namespace Stimulus {
         circle "Stimulus Presenter Collection Enumerator" as enumerator
 
         StimulusPresenterCollection --> list_ext
-        StimulusPresenterCollection::GetEnumerator --> enumerator
+        StimulusPresenterCollection --> enumerator
         DynamicStimulusPresenterCollection --> search_ext
     }
 
@@ -135,6 +139,12 @@ namespace Stimulus {
             }
         }
     }
+
+    Presentation.StimulusPresentationBehaviour -o Collections.StimulusPresenterCollection::_stimulusPresenters
+
+    Collections.StimulusPresenterCollection::makeSelection --> Presentation.StimulusPresentationBehaviour::Select
+    Collections.StimulusPresenterCollection::BeginTargetIndication --> Presentation.StimulusPresentationBehaviour::StartTargetIndication
+    Collections.StimulusPresenterCollection::EndTargetIndication --> Presentation.StimulusPresentationBehaviour::EndTargetIndication
 }
 
 @enduml
