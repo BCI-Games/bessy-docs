@@ -1,5 +1,6 @@
 @startuml selection
 !theme plain
+title Selection
 
 namespace Selection {
     interface ISelector {
