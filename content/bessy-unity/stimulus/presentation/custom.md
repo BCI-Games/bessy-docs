@@ -1,3 +1,6 @@
+---
+title: Custom Stimulus Presenters
+---
 User-defined stimulus presentation behaviour is implemented by extending the abstract `StimulusPresentationBehaviour`.
 
 ## Promises
@@ -6,7 +9,7 @@ A custom stimulus presentation behaviour must fulfil the promises imposed by the
 ### Stimulus
 Methods must be implemented to start or stop stimulus display. What this means depends on the expectations of your [trial behaviour](../../behaviours/trialing/).
 
-It is important to consider how your presenter(s) will be used. [P300 trial behaviours](../../behaviours/trialing/p300-trial-behaviours.md) trigger a change of state before rapidly reverting it, while an SSVEP trial behaviour *(custom or pre-built)* will expect a flickering stimulus to continue consistently until it is stopped.
+It is important to consider how your presenter(s) will be used. [P300 trial behaviours](../../behaviours/trialing/p300.md) trigger a change of state before rapidly reverting it, while an SSVEP trial behaviour *(custom or pre-built)* will expect a flickering stimulus to continue consistently until it is stopped.
 
 ### Selection
 The `Select` method can be used to directly trigger application logic or simply to indicate selection. In either case, multiple components can receive and act on predictions from the back end.
@@ -24,7 +27,7 @@ Indication should prior to the start of a training trial but may persist through
 - flashing the target slowly 3 times before the trial
 - on-screen instructions
 
-This functionality exists largely for use with the [automated training behaviour](../../behaviours/training/automated-training-behaviour.md), but may also be useful for alternative implementations.
+This functionality exists largely for use with the [automated training behaviour](../../behaviours/training/automated.md), but may also be useful for alternative implementations.
 
 ---
 ## Inheritance Alternatives

@@ -1,3 +1,6 @@
+---
+title: Pre-Built Stimulus Presenters
+---
 Two main pre-built stimulus components are provided, implementing common forms of digital stimulus presentation.
 
 ## Colour Flash Behaviour
@@ -6,12 +9,12 @@ Modifies the main colour of the primary material of an associated `Renderer` com
 ## Colour Toggle Stimulus Presenter
 Implements simple on/off flash colour flash using associated `ColourFlashBehaviour`. Starting stimulus sets the "on" colour, ending it sets the "off" colour. Triggers related
 
-Default behaviour expected by for [P300 trial behaviours](../../behaviours/trialing/p300-trial-behaviours.md).
+Default behaviour expected by for [P300 trial behaviours](../../behaviours/trialing/p300.md).
 
 ## Frequency Stimulus Presenter
 Implements continuous frequency stimulus as flickering between "on" and "off" states using associated `ColourFlashBehaviour`. Timing is defined by inherited class definitions of abstract duty cycle routine.
 
-Required by pre-built [SSVEP trial behaviour](../../behaviours/trialing/ssvep-trial-behaviour.md).
+Required by pre-built [SSVEP trial behaviour](../../behaviours/trialing/ssvep.md).
 
 ### Time Cycle Stimulus Presenter
 Defines frequency presenter duty cycle with time delay, accounting for discrepancies introduced by misalignment with refresh rate. Ensures each state is presented for at least a single frame.
