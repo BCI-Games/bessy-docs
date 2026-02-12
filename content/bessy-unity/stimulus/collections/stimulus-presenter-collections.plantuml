@@ -1,0 +1,87 @@
+@startuml stimulus-presenter-collections
+!theme plain
+title
+Stimulus Presenter Collections
+end title
+
+namespace Selection {
+    circle "Prediction Forwarding" as predictions
+
+    predictions ..> .Stimulus.Collections.StimulusPresenterCollection
+}
+
+namespace Behaviours {
+    namespace Training {
+        circle "Target Indication" as targetting
+        targetting ..> .Stimulus.Collections.StimulusPresenterCollection
+    }
+
+    namespace Trialing {
+        circle "Trial Behaviours" as trialing
+        trialing ..> .Stimulus.Collections.StimulusPresenterCollection
+    }
+}
+
+' Behaviours -l[hidden]- Selection
+
+namespace Stimulus {
+    namespace Collections {
+        class StimulusPresenterCollection{
+            int OptionCount
+            ..serialized fields..
+            # List<StimulusPresentationBehaviour> _stimulusPresenters
+            --
+            void makeSelection(int)
+            void BeginTargetIndication(int)
+            void EndTargetIndication()
+            StimulusPresentationBehaviour this[int]
+            List<StimulusPresentationBehaviour> GetSelectable()
+            List<StimulusPresentationBehaviour> GetVisible()
+            List<StimulusPresentationBehaviour> GetVisibleAndSelectable()
+            --
+            int Count
+            void Clear()
+            void Add(StimulusPresentationBehaviour)
+            void Remove(StimulusPresentationBehaviour)
+            bool Contains(StimulusPresentationBehaviour)
+            void CopyTo(StimulusPresentationBehaviour[], int)
+            IEnumerator GetEnumerator()
+        }
+
+        class DynamicStimulusPresenterCollection extends StimulusPresenterCollection {
+            SearchMethod PopulationMethod { Type | Tag }
+            Scope PopulationScope { Scene | Children | ChildrenOfParent }
+            string PresenterTag {"BCI"}
+            void Repopulate()
+            List<StimulusPresentationBehaviour> GetSelectable()
+            List<StimulusPresentationBehaviour> GetVisible()
+        }
+
+        circle "Presenter List Extensions" as list_ext
+        circle "Presenter Search Extensions" as search_ext
+        circle "Stimulus Presenter Collection Enumerator" as enumerator
+
+        StimulusPresenterCollection --> list_ext
+        StimulusPresenterCollection --> enumerator
+        DynamicStimulusPresenterCollection --> search_ext
+    }
+
+    namespace Presentation {
+        abstract StimulusPresentationBehaviour {
+            bool IsSelectable
+            {abstract} void StartStimulusDisplay()
+            {abstract} void EndStimulusDisplay()
+            {abstract} void Select()
+            {abstract} void StartTargetIndication()
+            {abstract} void EndTargetIndication()
+        }
+    }
+
+    Presentation.StimulusPresentationBehaviour -o Collections.StimulusPresenterCollection::_stimulusPresenters
+
+    Collections.StimulusPresenterCollection::makeSelection --> Presentation.StimulusPresentationBehaviour::Select
+    Collections.StimulusPresenterCollection::BeginTargetIndication --> Presentation.StimulusPresentationBehaviour::StartTargetIndication
+    Collections.StimulusPresenterCollection::EndTargetIndication --> Presentation.StimulusPresentationBehaviour::EndTargetIndication
+}
+
+@enduml
