@@ -31,10 +31,10 @@ namespace Behaviours {
         providing clear routine structure and utilities
     end note
 
-    class MarkerComponentProvider {
+    class CommunicationComponentProvider {
         # LSLMarkerWriter MarkerWriter
         # LSLResponseProvider ResponseProvider
-        # void ProvideMarkerComponentsToChildren()
+        # void ProvideCommunicationComponentsToChildren()
         void UpdateClassifier()
     }
     note top
@@ -42,10 +42,10 @@ namespace Behaviours {
         providing them to any children implementing
         the IBCIMarkerSource or ISelector interfaces
     end note
-    MarkerComponentProvider ..> IBCIMarkerSource::MarkerWriter
-    MarkerComponentProvider ..> ISelector::MakeSelection
+    CommunicationComponentProvider ..> IBCIMarkerSource::MarkerWriter
+    CommunicationComponentProvider ..> ISelector::MakeSelection
 
-    class BCIController extends MarkerComponentProvider {
+    class BCIController extends CommunicationComponentProvider {
         bool IsRunningTrial
         bool IsRunningTraining
         ..serialized fields..

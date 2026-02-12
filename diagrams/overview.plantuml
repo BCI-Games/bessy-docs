@@ -5,15 +5,15 @@ Essential Class Overview
 end title
 
 namespace Behaviours {
-    class BCIController extends MarkerComponentProvider {
+    class BCIController extends CommunicationComponentProvider {
         StartTrial()
         InterruptTrial()
         StartTraining()
         InterruptTraining()
     }
 
-    class MarkerComponentProvider {
-        # ProvideMarkerComponentsToChildren()
+    class CommunicationComponentProvider {
+        # ProvideCommunicationComponentsToChildren()
         UpdateClassifier()
     }
 
@@ -38,7 +38,7 @@ namespace Behaviours {
             void MakeSelection(int)
         }
     }
-    MarkerComponentProvider ..> ISelector
+    CommunicationComponentProvider ..> ISelector
 }
 
 namespace LSLFramework {
@@ -62,8 +62,8 @@ namespace LSLFramework {
     }
 }
 
-MarkerComponentProvider o-- LSLMarkerWriter
-MarkerComponentProvider o-- LSLResponseProvider
+CommunicationComponentProvider o-- LSLMarkerWriter
+CommunicationComponentProvider o-- LSLResponseProvider
 
 TrialBehaviour --> LSLMarkerWriter
 TrainingBehaviour --> LSLMarkerWriter
