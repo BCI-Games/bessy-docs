@@ -58,6 +58,7 @@ body {
 
     @media (max-width:800px) {
         > nav { display: none }
+        header nav ol { padding: 0 }
         main {
             max-width: calc(100vw - 2 * var(--page-gap));
             margin: unset;
@@ -66,9 +67,13 @@ body {
 }
 
 
-nav ol {
+header nav ol {
     display: flex;
     list-style: none;
+
+    text-wrap: nowrap;
+    overflow: scroll;
+
     gap: 0;
 
     li::after {
