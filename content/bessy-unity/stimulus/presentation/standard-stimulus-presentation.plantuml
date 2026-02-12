@@ -1,0 +1,67 @@
+@startuml standard-stimulus-presentation
+!theme plain
+title
+Pre-Built Stimulus Presentation Classes
+end title
+
+
+namespace Stimulus {
+    namespace Presentation {
+        abstract StimulusPresentationBehaviour {
+            bool IsSelectable
+            {abstract} void StartStimulusDisplay()
+            {abstract} void EndStimulusDisplay()
+            {abstract} void Select()
+            {abstract} void StartTargetIndication()
+            {abstract} void EndTargetIndication()
+        }
+
+        StimulusPresentationBehaviour::Select -- Standard.ColourFlashBehaviour::StartSelectionIndication
+        StimulusPresentationBehaviour::StartTargetIndication -- Standard.ColourFlashBehaviour::StartTargetIndication
+        StimulusPresentationBehaviour::EndTargetIndication -- Standard.ColourFlashBehaviour::EndTargetIndication
+
+        namespace Standard {
+            class ColourFlashBehaviour {
+                bool IsFlashing
+                Color OnColour
+                Color OffColour
+                float TargetIndicationFlashPeriod
+                float TargetIndicationFlashCount
+                SelectionFlashPeriod
+                SelectionFlashCount
+                ..serialized fields..
+                - Renderer _renderer
+                --
+                void StartSelectionIndication()
+                void StopSelectionIndication()
+                void StartTargetIndication()
+                void EndTargetIndication()
+                void SetColour(Color)
+            }
+
+            class ColourToggleStimulusPresenter extends .Stimulus.Presentation.StimulusPresentationBehaviour {
+                void ToggleRendererColour(bool)
+            }
+            ColourToggleStimulusPresenter::ToggleRendererColour -> ColourFlashBehaviour::SetColour
+
+            abstract FrequencyStimulusPresenter extends ColourToggleStimulusPresenter
+
+            class TimeCycleFrequencyStimulusPresenter extends FrequencyStimulusPresenter {
+                float Frequency
+                void SetFrequency(float)
+            }
+            class FrameCycleFrequencyStimulusPresenter extends FrequencyStimulusPresenter {
+                int FramesOn
+                int FramesOff
+                float CalculateNominalFrequency(float)
+            }
+        }
+    }
+}
+
+together {
+    abstract Stimulus.Presentation.StimulusPresentationBehaviour
+    class Stimulus.Presentation.Standard.ColourFlashBehaviour
+}
+
+@enduml
