@@ -15,6 +15,9 @@
     {{ $isAncestor := or (.section.IsAncestor .page) (eq .section .page) }}
     {{ $class := cond $isAncestor "folder open" "folder" }}
 
+    {{ $sectionHasChildren := or .section.RegularPages .section.Sections }}
+    {{ $class := cond $sectionHasChildren $class "" }}
+
     <li class="{{ $class }}">
         <a href="{{.section.RelPermalink}}">
             {{ partial "page-title" .section }}
