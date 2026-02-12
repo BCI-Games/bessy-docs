@@ -1,0 +1,44 @@
+@startuml stimulus-presentation
+!theme plain
+title
+Stimulus Presentation Classes
+end title
+
+interface Selection.ISelectable
+interface Behaviours.Training.ITargetable
+
+namespace Behaviours {
+    namespace Training {
+        interface ITargetable
+        circle "Target Indication" as targetting
+        targetting ..> .Stimulus.Presentation.StimulusPresentationBehaviour
+    }
+
+    namespace Trialing {
+        circle "Trial Behaviours" as trialing
+        trialing ..> .Stimulus.Presentation.StimulusPresentationBehaviour
+    }
+}
+
+namespace Stimulus {
+    namespace Presentation {
+        abstract StimulusPresentationBehaviour implements .Selection.ISelectable, .Behaviours.Training.ITargetable {
+            bool IsSelectable
+            {abstract} void StartStimulusDisplay()
+            {abstract} void EndStimulusDisplay()
+            {abstract} void Select()
+            {abstract} void StartTargetIndication()
+            {abstract} void EndTargetIndication()
+        }
+
+        namespace Standard {
+            circle "Provided Presentation Behaviours" as behaviours
+            StimulusPresentationBehaviour <|-- behaviours
+        }
+
+        circle "Custom Presentation Behaviours" as custom
+        StimulusPresentationBehaviour <|-- custom 
+    }
+}
+
+@enduml

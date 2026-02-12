@@ -79,12 +79,10 @@ nav ol {
 
 img {
     display: block;
-
     max-width: 100%;
-    max-height: 30em;
-
     margin: auto;
 }
+figure { margin-inline: 0 }
 figcaption { text-align: center }
 
 a { color: var(--accent-colour) }
