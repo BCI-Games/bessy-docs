@@ -1,3 +1,7 @@
+---
+title: Input Paradigms
+weight: 1
+---
 EEG data has been used to control digital interfaces in a variety of ways. BCI Essentials focuses on a core subset of these input paradigms known to be the most practical and effective.
 
 ## Full Support
