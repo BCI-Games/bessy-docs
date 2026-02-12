@@ -1,0 +1,7 @@
+Stimulus presentation is driven by independent presentation components triggered by training and trial behaviours. Implementing `ISelectable` and `ITargetable`, any implementation of a `StimulusPresentationBehaviour` must be able to indicate itself as the current training target and be selected *(though selection behaviour may be limited to indication, deferring logical selection to an unrelated component; see [Selection](../../selection/))*. Additionally, a presentation behaviour must implement methods to start and end stimulus presentation. These functional promises enable any extension of the base `StimulusPresentationBehaviour` class to be used interchangeably by other behaviours *(most prominently [Presenter Collections](../collections/))*.
+
+A number of "[Standard](./standard.md)" stimulus presentation behaviours are provided to cover basic expected functionality like toggled colour flashes or flashing at a steady frequency.
+
+More particular [Custom Stimulus Behaviour](./custom.md) is best implemented by extending `StimulusPresentationBehaviour`.
+
+Though these behaviours are *ideally* unaware of their environment or the trial routines which invoke them, a certain amount of coordination may be required. The provided `SSVEPTrialBehaviour` or custom implementation of it need to either gather or assign stimulus frequencies to presenters. Certain paradigms are also intuitively dependent on the presentation of certain stimuli.
