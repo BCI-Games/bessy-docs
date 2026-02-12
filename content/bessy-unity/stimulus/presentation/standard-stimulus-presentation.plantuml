@@ -1,7 +1,7 @@
 @startuml standard-stimulus-presentation
 !theme plain
 title
-Pre-Built Stimulus Presentation Classes
+Pre-Built Stimulus Presenters
 end title
 
 

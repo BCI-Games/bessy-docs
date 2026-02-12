@@ -34,7 +34,7 @@ This functionality exists largely for use with the [automated training behaviour
 Though it is recommended to use inheritance to implement stimulus presentation behaviours, other classes of a manner that may be more familiar to some developers are also provided.
 
 ### Unity Events
-The `UnityEventStimulusPresentor` is provided for developers more comfortable with implementing callbacks as unity events. Stimulus, selection, and target indication are all exposed to the inspector as editable events much like an interactive UI element.
+The `UnityEventStimulusPresenter` is provided for developers more comfortable with implementing callbacks as unity events. Stimulus, selection, and target indication are all exposed to the inspector as editable events much like an interactive UI element.
 
 ### Coroutine
-An abstract `CoroutineStimulusPresenter` defers all presentor methods to abstract coroutine methods. In this way, time delays and other enumerator constraints can be easily incorporated.
+An abstract `CoroutineStimulusPresenter` defers all presenter methods to abstract coroutine methods. In this way, time delays and other enumerator constraints can be easily incorporated.
