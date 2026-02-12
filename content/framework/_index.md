@@ -9,7 +9,7 @@ BCI Essentials uses [Lab Streaming Layer (LSL)](https://labstreaminglayer.org/) 
 | `BCI` | [responses](responses) |
 
 ## Timeline Definitions
-{{< description-list >}}
+{{<description-list>}}
     Epoch
     Data processing window surrounding a period of focus on a target class or object. For discrete stimulus paradigms like P300, an epoch consists of a baseline period followed by an expectation of stimulus response. Paradigms targetting a specific state such as MI and SSVEP define these classed periods arbitrarily in conjunction with user prompting. All training epochs must have the same length.
 |
@@ -18,6 +18,6 @@ BCI Essentials uses [Lab Streaming Layer (LSL)](https://labstreaminglayer.org/) 
 |
     Training
     Sequence of targetted trials targetting different objects or classes providing the data and event markers necessary to build a classifier for live inferences.
-{{< /description-list >}}
+{{</description-list>}}
 
-{{< figure-link src="./timeline-definitions.png" alt="Composite diagram illustrating definitions of the different time window terms defined above" >}}
+{{<figure-link src="./timeline-definitions.png" alt="Composite diagram illustrating definitions of the different time window terms defined above">}}

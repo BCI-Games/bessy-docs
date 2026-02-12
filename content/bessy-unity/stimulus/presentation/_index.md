@@ -8,4 +8,4 @@ More particular [Custom Stimulus Behaviour](./custom.md) is best implemented by 
 
 Though these behaviours are *ideally* unaware of their environment or the trial routines which invoke them, a certain amount of coordination may be required. The provided `SSVEPTrialBehaviour` or custom implementation of it need to either gather or assign stimulus frequencies to presenters. Certain paradigms are also intuitively dependent on the presentation of certain stimuli.
 
-{{< figure-link src="./stimulus-presentation.svg" alt="Class diagram of stimulus presentation namespace" >}}
+{{<figure-link src="./stimulus-presentation.svg" alt="Class diagram of stimulus presentation namespace">}}

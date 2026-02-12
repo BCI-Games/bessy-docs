@@ -9,4 +9,4 @@ The `Stimulus` namespace includes a number of classes used in the presentation o
 
 Stimulus is not relevant to all paradigms.
 
-{{< figure-link src="./stimulus.svg" alt="Detailed class diagram of the stimulus namespace" >}}
+{{<figure-link src="./stimulus.svg" alt="Detailed class diagram of the stimulus namespace">}}
