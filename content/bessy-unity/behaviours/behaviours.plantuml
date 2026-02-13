@@ -1,8 +1,6 @@
 @startuml behaviours
 !theme plain
-title
-Base Behaviour Classes
-end title
+title Core Behaviour Classes
 
 together {
     interface Selection.ISelector {
