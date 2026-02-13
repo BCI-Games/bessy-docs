@@ -1,8 +1,6 @@
 @startuml training-behaviours
 !theme plain
-title
-Training Behaviours
-end title
+title Training Behaviours
 
 namespace Selection {
     interface ISelector {
