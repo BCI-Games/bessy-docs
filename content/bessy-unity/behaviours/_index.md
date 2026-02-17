@@ -33,6 +33,10 @@ These classes provide skeletal functionality used by a number of behaviours.
 ### Coroutine Behaviour
 Wraps an abstract `Run` coroutine as the core logical sequence implemented by any extended classes with a number of utilities like status tracking, interruption, and virtual methods triggered at the start and end of a run. Base for training and trial behaviours.
 
+Overriding the `Run` method allows you to schedule actions delayed by any Unity coroutine enumerator like `WaitForSeconds`. This includes any other custom Enumerator method.
+
+`SetUp` and `CleanUp` can implement arbitrary actions triggered before and after any run, even if interrupted.
+
 ### MonoBehaviour Using Extended Attributes
 Functionally identical to a `MonoBehaviour`, this class triggers the use of a custom Unity inspector supporting additional property attributes:
 ```cs

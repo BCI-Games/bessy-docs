@@ -14,7 +14,7 @@ Default behaviour expected by for [P300 trial behaviours](../../behaviours/trial
 ## Frequency Stimulus Presenter
 Implements continuous frequency stimulus as flickering between "on" and "off" states using associated `ColourFlashBehaviour`. Timing is defined by inherited class definitions of abstract duty cycle routine.
 
-Required by pre-built [SSVEP trial behaviour](../../behaviours/trialing/ssvep.md).
+Required by pre-built [SSVEP trial behaviour](../../behaviours/trialing/_index.md#ssvep).
 
 ### Time Cycle Stimulus Presenter
 Defines frequency presenter duty cycle with time delay, accounting for discrepancies introduced by misalignment with refresh rate. Ensures each state is presented for at least a single frame.

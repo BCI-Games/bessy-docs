@@ -1,3 +1,0 @@
----
-title: SSVEP Trial Behaviour
----
