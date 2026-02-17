@@ -3,7 +3,7 @@ BCI Essentials provides a single type of meaningful response: predictions. A rec
 | --- | --- |
 | `[#]` | Prediction sent in response to an epoch marker with no train target (`-1`) or the end of a trial as relevant to the paradigm used |
 | `ping` | Sent periodically to test and keep the LSL connection alive |
-| `marker received: ...` | Confirmation of receipt for a [command](#command-markers) or [event](#event-markers) marker |
+| `marker received: ...` | Confirmation of receipt for a [status](#status-markers) or [event](#event-markers) marker |
 
 ## Predictions
 Classification results are sent as a single number enclosed in braces indicating the class or object index selected as relevant to the trial context when there is no training target (`-1`). Different paradigms will send predictions at different intervals:

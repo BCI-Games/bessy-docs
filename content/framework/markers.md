@@ -2,7 +2,7 @@
 
 The set of accepted markers define training and stimulus information associated with EEG data by transmission time. Markers are split into two broad types:
 
-## Command Markers
+## Status Markers
 Some markers are explicit strings sent to indicate a change of state. While primarily used for data analysis after a user session, these markers can also control when data is processed for a real-time classifier.
 
 | Content | Typical Back End Effects |
@@ -13,6 +13,8 @@ Some markers are explicit strings sent to indicate a change of state. While prim
 | `Train Classifier` | Update classifier based on training data |
 | `Update Classifier` | Update classifier based on training data |
 | `Done with all RS collection` | Process resting state data |
+
+*resting state event markers remain partially implemented*
 
 ## Event Markers
 The primary data driver and communication structure used by BCI Essentials are paradigm-specific markers describing discrete instances of stimulus and/or periods of expected activity. P300 markers represent the stimulus state in a single instant, while others indicate the start of an *epoch*; a discrete period of time within which to train or classify data. **All training epochs must be the same length.** This is best achieved by cutting arbitrarily sized training periods into sets of smaller, fixed-length epochs.

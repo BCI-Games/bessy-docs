@@ -51,7 +51,7 @@ namespace LSLFramework {
     }
 
     class LSLMarkerWriter extends LSLStreamWriter {
-        command markers
+        status markers
         ..
         void PushTrialStartedMarker()
         void PushTrialEndsMarker()
@@ -59,7 +59,7 @@ namespace LSLFramework {
         void PushTrainClassifierMarker()
         void PushUpdateClassifierMarker()
         void PushDontWithRestingStateCollectionMarker()
-        void PushCommandMarker<T : ICommandMarker>()
+        void PushStatusMarker<T : IStatusMarker>()
         --
         event markers
         ..
@@ -101,9 +101,9 @@ namespace LSLFramework {
         string MarkerString
     }
 
-    interface ICommandMarker extends ILSLMarker
+    interface IStatusMarker extends ILSLMarker
 
-    circle "...Specialized Command Markers" as command_markers implements ICommandMarker
+    circle "...Specialized Status Markers" as status_markers implements IStatusMarker
 
     abstract EventMarker implements ILSLMarker {
         int ObjectCount
