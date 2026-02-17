@@ -4,20 +4,22 @@ title P300 Trial Behaviours
 
 namespace Stimulus {
     namespace Presentation.Standard {
-        circle ColourToggleStimulusPresenter
+        circle "Colour Toggle Stimulus Presenter" as presenter
     }
 
     namespace Collections {
-        circle StimulusPresenterCollection
+        circle "Stimulus Presenter Collection" as collection
     }
 
-    StimulusPresenterCollection o.u. ColourToggleStimulusPresenter
+    collection o.u. presenter
 }
 
 namespace Utilities {
-    circle BlackWhiteMatrixFactory
-    circle ContextAwareUtilities    
-    circle RNRAUtilities
+    circle "Black White Matrix Factory" as bw_matrix
+    circle "Context Aware Utilities" as context
+    circle "Array Utilities" as arrays
+
+    context --> arrays
 }
 
 namespace Behaviours.Trialing.P300 {
@@ -27,26 +29,26 @@ namespace Behaviours.Trialing.P300 {
         float OnTime
         float OffTime
     }
-    P300TrialBehaviour::PresenterCollection -- .Stimulus.Collections.StimulusPresenterCollection
-    P300TrialBehaviour ..> .Stimulus.Presentation.Standard.ColourToggleStimulusPresenter
+    P300TrialBehaviour::PresenterCollection -- .Stimulus.Collections.collection
+    P300TrialBehaviour ..> .Stimulus.Presentation.Standard.presenter
 
     class SingleFlashTrialBehaviour extends P300TrialBehaviour
-    SingleFlashTrialBehaviour --> .Utilities.RNRAUtilities
+    SingleFlashTrialBehaviour --> .Utilities.arrays
     class ContextAwareSingleFlashTrialBehaviour extends SingleFlashTrialBehaviour
-    ContextAwareSingleFlashTrialBehaviour --> .Utilities.ContextAwareUtilities
+    ContextAwareSingleFlashTrialBehaviour --> .Utilities.context
 
     abstract MultiFlashTrialBehaviour extends P300TrialBehaviour
     class ContextAwareMultiFlashTrialBehaviour extends MultiFlashTrialBehaviour
-    ContextAwareMultiFlashTrialBehaviour --> .Utilities.ContextAwareUtilities
+    ContextAwareMultiFlashTrialBehaviour --> .Utilities.context
 
     abstract GridFlashTrialBehaviour extends MultiFlashTrialBehaviour {
         int Rows
         int Columns
     }
     class RowColumnFlashTrialBehaviour extends GridFlashTrialBehaviour
-    RowColumnFlashTrialBehaviour --> .Utilities.RNRAUtilities
+    RowColumnFlashTrialBehaviour --> .Utilities.arrays
     class CheckerboardFlashTrialBehaviour extends GridFlashTrialBehaviour
-    CheckerboardFlashTrialBehaviour --> .Utilities.BlackWhiteMatrixFactory
+    CheckerboardFlashTrialBehaviour --> .Utilities.bw_matrix
 }
 
 @enduml
