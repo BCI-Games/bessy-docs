@@ -17,8 +17,8 @@ Selection may also be implemented by programmatically subscribing to predictions
 ## SelectionBehaviour
 The basis of [`TargetIndicationBehaviour`](../behaviours/training/automated.md#target-indication-behaviour) and thus used by the [`AutomatedTrainingBehaviour`](../behaviours/training/automated.md#target-indication-behaviour) to make selections as part of training feedback.
 
-## SelectorShortcuts
-A debug/input bypass helper providing a set of keyboard shortcuts which will trigger the referenced `SelectionBehaviour`. Key binds and associated selection indices are configurable in the Unity Inspector.
+## Selector Shortcuts
+A debug/input bypass helper providing a set of keyboard shortcuts which will trigger the referenced `SelectionBehaviour`, delayed by an active trial behaviour sequence if referenced. Key binds and associated selection indices are configurable in the Unity Inspector.
 
 ## ISelectable
 Implementing this interface guarantees a class is able to receive selections. This is relevant to the [`StimulusPresentationBehaviour`](../stimulus/presentation/) class, but is not used internally due to constraints of the Unity inspector.
