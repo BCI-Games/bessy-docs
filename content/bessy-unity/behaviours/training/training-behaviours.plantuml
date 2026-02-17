@@ -35,6 +35,9 @@ namespace Behaviours.Training {
     }
     TargetIndicationBehaviour::BeginTargetIndication ..> ITargetable::StartTargetIndication
 
+    circle "Custom Training Behaviours" as custom
+    TrainingBehaviour <|-- custom
+
     class SingleRoundTrainingBehaviour extends TrainingBehaviour {
         int TargetIndex
         float TargetIndicationPeriod
