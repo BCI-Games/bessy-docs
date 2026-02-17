@@ -4,10 +4,10 @@ A processing and classification module *(the "back end")* receives data and comm
 
 {{<figure-link src="./interaction.svg" alt="System interaction diagram showing communication between Unity and Python layers through the Lab Streaming Layer communication protocol">}}
 
-## Back Ends
-{{<tag-list tag="back_end">}}
-
 ## Front End Toolkits
 {{<tag-list tag="front_end">}}
+
+## Back Ends
+{{<tag-list tag="back_end">}}
 
 ## Site Index:
