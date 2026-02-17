@@ -1,0 +1,52 @@
+@startuml p300-behaviours
+!theme plain
+title P300 Trial Behaviours
+
+namespace Stimulus {
+    namespace Presentation.Standard {
+        circle ColourToggleStimulusPresenter
+    }
+
+    namespace Collections {
+        circle StimulusPresenterCollection
+    }
+
+    StimulusPresenterCollection o.u. ColourToggleStimulusPresenter
+}
+
+namespace Utilities {
+    circle BlackWhiteMatrixFactory
+    circle ContextAwareUtilities    
+    circle RNRAUtilities
+}
+
+namespace Behaviours.Trialing.P300 {
+    abstract P300TrialBehaviour {
+        StimulusPresenterCollection PresenterCollection
+        int FlashesPerOption
+        float OnTime
+        float OffTime
+    }
+    P300TrialBehaviour::PresenterCollection -- .Stimulus.Collections.StimulusPresenterCollection
+    P300TrialBehaviour ..> .Stimulus.Presentation.Standard.ColourToggleStimulusPresenter
+
+    class SingleFlashTrialBehaviour extends P300TrialBehaviour
+    SingleFlashTrialBehaviour --> .Utilities.RNRAUtilities
+    class ContextAwareSingleFlashTrialBehaviour extends SingleFlashTrialBehaviour
+    ContextAwareSingleFlashTrialBehaviour --> .Utilities.ContextAwareUtilities
+
+    abstract MultiFlashTrialBehaviour extends P300TrialBehaviour
+    class ContextAwareMultiFlashTrialBehaviour extends MultiFlashTrialBehaviour
+    ContextAwareMultiFlashTrialBehaviour --> .Utilities.ContextAwareUtilities
+
+    abstract GridFlashTrialBehaviour extends MultiFlashTrialBehaviour {
+        int Rows
+        int Columns
+    }
+    class RowColumnFlashTrialBehaviour extends GridFlashTrialBehaviour
+    RowColumnFlashTrialBehaviour --> .Utilities.RNRAUtilities
+    class CheckerboardFlashTrialBehaviour extends GridFlashTrialBehaviour
+    CheckerboardFlashTrialBehaviour --> .Utilities.BlackWhiteMatrixFactory
+}
+
+@enduml

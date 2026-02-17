@@ -1,0 +1,56 @@
+@startuml trial-behaviours
+!theme plain
+title Trial Behaviours
+
+namespace Stimulus.Presentation.Standard {
+    circle FrequencyStimulusPresenter
+}
+
+namespace Behaviours {
+    circle CoroutineBehaviour
+
+    interface IBCIMarkerSource {
+        LSLMarkerWriter MarkerWriter
+    }
+
+    namespace Trialing {
+        abstract TrialBehaviour extends .Behaviours.CoroutineBehaviour implements .Behaviours.IBCIMarkerSource {
+            bool HasTrainingTarget
+            void StartTestingTrial()
+            void StartTrainingTrial(int)
+            void ClearTrainingTarget()
+        }
+
+        abstract PersistentTrialBehaviour extends TrialBehaviour {
+            int TrainingEpochCount
+            float EpochLength
+            float InterEpochInterval
+            {abstract} void SendTrainingMarker(int)
+            {abstract} void SendClassificationMarker()
+        }
+
+        class SSVEPTrialBehaviour extends PersistentTrialBehaviour {
+            int TargetFrameRate
+            List<FrequencyStimulusPresenter> Presenters
+        }
+        SSVEPTrialBehaviour o-u- .Stimulus.Presentation.Standard.FrequencyStimulusPresenter
+
+
+        circle "Custom Trial Behaviours" as custom
+        TrialBehaviour <|-- custom
+
+        namespace P300 {
+            abstract P300TrialBehaviour extends .Behaviours.Trialing.TrialBehaviour {
+                StimulusPresenterCollection PresenterCollection
+                int FlashesPerOption
+                float OnTime
+                float OffTime
+            }
+
+            circle "...Specialized P300 Trial Behaviours" as specialized
+            P300TrialBehaviour <|-- specialized
+        }
+    }
+}
+
+@enduml
