@@ -1,8 +1,16 @@
 @startuml overview
 !theme plain
-title
-Essential Class Overview
-end title
+title Essential Class Overview
+
+
+interface Selection.ISelector {
+    void MakeSelection(int)
+}
+
+namespace Stimulus.Presentation {
+    circle "Stimulus Presenters" as presenters
+}
+
 
 namespace Behaviours {
     class BCIController extends CommunicationComponentProvider {
@@ -32,13 +40,7 @@ namespace Behaviours {
 
     BCIController --> TrialBehaviour
     BCIController --> TrainingBehaviour
-
-    namespace Selection {
-        interface ISelector {
-            void MakeSelection(int)
-        }
-    }
-    CommunicationComponentProvider ..> ISelector
+    CommunicationComponentProvider .> ISelector
 }
 
 namespace LSLFramework {
@@ -67,8 +69,8 @@ CommunicationComponentProvider o-- LSLResponseProvider
 
 TrialBehaviour --> LSLMarkerWriter
 TrainingBehaviour --> LSLMarkerWriter
+TrialBehaviour <. TrainingBehaviour
 
-abstract Stimulus.Presentation.StimulusPresentationBehaviour
-TrialBehaviour --> StimulusPresentationBehaviour
+TrialBehaviour ..> presenters
 
 @enduml
