@@ -11,7 +11,7 @@ BCI Essentials Unity can be added to any [Unity project through git using the bu
 1. Install [LSL4Unity Package](https://github.com/labstreaminglayer/LSL4Unity) from `https://github.com/labstreaminglayer/LSL4Unity.git`
 2. Install [BCI Essentials package](https://github.com/kirtonBCIlab/bci-essentials-unity) from `https://github.com/kirtonBCIlab/bci-essentials-unity.git`
 
-*tested with Unity versions 2021.3.15.f1 and 6000.0.61f1*
+*tested with Unity versions 2021.3.15.f1, 6000.0.61f1, and 6000.3.9f1*
 
 ## Running Samples
 1. Using Package Manager, select the BCI Essentials package and import the any of the samples
