@@ -40,10 +40,13 @@ Overriding the `Run` method allows you to schedule actions delayed by any Unity 
 ### MonoBehaviour Using Extended Attributes
 Functionally identical to a `MonoBehaviour`, this class triggers the use of a custom Unity inspector supporting additional property attributes:
 ```cs
+// available anywhere
 [InspectorReadOnly]
+[DisplayName]
+
+// extended attributes
 [StartFoldoutGroup(string)]
 [EndFoldoutGroup]
 [AppendToFoldoutGroup(string)]
 [ShowIf(string | string, int[])]
-[DisplayName]
 ```
