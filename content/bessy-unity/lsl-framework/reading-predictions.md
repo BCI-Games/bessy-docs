@@ -33,7 +33,7 @@ InStream.Subscribe<SingleChannelLSLResponse>(response => {
 InStream.UsubscribePredictions(OnPredictionReceived);
 // The unsubscribe method does not need to match the subscribe helper used.
 // Invalidated callbacks (from destroyed components) will be automatically unsubscribed.
-// This enabled the safe use of lambdas regardless of component lifetimes,
+// This enables the safe use of lambdas regardless of component lifetimes,
 // but they cannot be unsubscribed manually unless a reference is stored somewhere.
 ```
 The basic `LSLStreamReader` can also be used to manually pull typed responses if desired.
