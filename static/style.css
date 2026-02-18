@@ -28,59 +28,58 @@ body {
     min-height: var(--page-height);
 
     margin: auto;
+}
+body main {
+    max-width: calc(100vw - var(--nav-width) - 2 * var(--page-gap));
 
-    > nav {
-        position: fixed;
-        width: calc(var(--nav-width) - 2 * var(--page-gap));
-        height: calc(var(--page-height) - 2 * var(--page-gap));
-
-        margin-block: var(--page-gap);
-        padding: var(--page-gap);
-
-        border-right: solid 2px;
-
-        > a {
-            display: flex;
-            justify-content: center;
-
-            font-size: 2em;
-        }
-
-        > ul > li > a { font-size: larger }
-    }
-
-    main {
-        max-width: calc(100vw - var(--nav-width) - 2 * var(--page-gap));
-
-        margin-left: var(--nav-width);
-        padding: var(--page-gap);
-    }
-
-    @media (max-width:800px) {
-        > nav { display: none }
-        header nav ol { padding: 0 }
-        main {
-            max-width: calc(100vw - 2 * var(--page-gap));
-            margin: unset;
-        }
-    }
+    margin-left: var(--nav-width);
+    padding: var(--page-gap);
 }
 
 
-header nav ol {
+#sidebar {
+    position: fixed;
+    width: calc(var(--nav-width) - 2 * var(--page-gap));
+    height: calc(var(--page-height) - 2 * var(--page-gap));
+
+    margin-block: var(--page-gap);
+    padding: var(--page-gap);
+
+    border-right: solid 2px;
+}
+#sidebar > a {
+    display: flex;
+    justify-content: center;
+
+    font-size: 2em;
+}
+#sidebar > ul > li > a { font-size: larger }
+
+
+#crumb-links {
     display: flex;
     list-style: none;
 
-    text-wrap: nowrap;
+    white-space: pre;
     overflow: scroll;
 
     gap: 0;
+}
+#crumb-links li::after{
+    content: "/";
+    padding: 1ch;
+}
 
-    li::after {
-        content: "/";
-        padding: 1ch;
+
+@media screen and (width < 800px) {
+    #sidebar { display: none }
+    #crumb-links { padding: 0 }
+    body main {
+        max-width: calc(100vw - 2 * var(--page-gap));
+        margin: unset;
     }
 }
+
 
 img {
     display: block;
@@ -105,25 +104,24 @@ table {
     width: 100%;
 
     border-collapse: collapse;
-
-    td {
-        padding: 0.25em 1ch;
-
-        word-wrap: anywhere;
-        text-wrap-style: balance;
-
-        border: 2px solid;
-    }
 }
+td {
+    padding: 0.25em 1ch;
+
+    word-wrap: anywhere;
+    text-wrap-style: balance;
+
+    border: 2px solid;
+}
+
 
 pre {
     max-width: 100%;
     padding: 1ch;
 
     overflow: scroll;
-
-    code {
-        padding: unset;
-        background-color: unset;
-    }
+}
+pre code {
+    padding: unset;
+    background-color: unset;
 }

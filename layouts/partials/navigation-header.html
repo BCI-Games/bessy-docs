@@ -1,7 +1,7 @@
 {{ if not .IsHome }}
 <header>
     <nav>
-        <ol>
+        <ol id="crumb-links">
             <li><a href='{{partial "home-path" .}}'>Home</a></li>
             {{ range after 1 .Ancestors.Reverse }}
                 <li>
