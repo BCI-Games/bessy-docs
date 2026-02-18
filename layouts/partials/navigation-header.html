@@ -2,7 +2,7 @@
 <header>
     <nav>
         <ol>
-            <li><a href="/">Home</a></li>
+            <li><a href='{{partial "home-path" .}}'>Home</a></li>
             {{ range after 1 .Ancestors.Reverse }}
                 <li>
                     <a href="{{ .RelPermalink }}">
