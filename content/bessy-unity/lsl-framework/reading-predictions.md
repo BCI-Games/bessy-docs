@@ -45,8 +45,7 @@ The basic `LSLStreamReader` can also be used to manually pull typed responses if
 | `EmptyLSLResponse` | LSL sample with no content |
 | `SingleChannelLSLResponse` | Base class for all expected responses, *indicates parsing failure if not a more specific type* |
 | `LSLPing` | "ping" |
-| `LSLPredictionResponse` | Prediction from the classifier indicating the selection of a specific object |
-| `LSLMarkerReceipt` | Confirmation of receipt for a [marker][markers] |
+| `LSLPrediction` | Prediction from the classifier indicating the selection of a specific object |
 
 
 [responses]: ../../framework/responses.md
