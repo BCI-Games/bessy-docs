@@ -21,10 +21,8 @@ The primary data driver and communication structure used by BCI Essentials are p
 
 | Format | Example | Description |
 | --- | --- | --- |
-| `mi,{count},{target},{length}` | `mi,1,0,2.5` | start of Motor imagery epoch |
-| `switch,{count},{target},{length}` | `switch,1,0,2.5` | start of Switch access *(MI subset)* epoch |
+| `mi,{count},{target},{length}` | `mi,1,0,2.5` | start of Motor Imagery epoch |
 | `ssvep,{count},{target},{length},{...frequencies}` | `ssvep,4,2,1.5,12.5,18.7,24.4,30.1` | start of SSVEP epoch |
-| `tvep,{count},{target},{length},{...frequencies}` | `tvep,6,2,1.5,15.0` | start of TVEP epoch |
 | `p300,s,{count},{target},{active}` | `p300,s,8,3,1` | Instance of stimulus presentation for a specific object, triggered as part of a flashing routine |
 | `p300,m,{count},{target},{...active}` | `p300,m,8,3,1,3,5,7` | Instance of stimulus presentation for multiple objects simultaneously, triggered as part of a flashing routine |
 
