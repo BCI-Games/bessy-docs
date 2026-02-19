@@ -19,4 +19,6 @@ Different paradigms will send predictions at different intervals:
 | Motor Imagery | End of Epoch ***or*** Trial *(but not both)*, as configured in back end |
 
 ### Object/Class Indexing
-The value provided in a prediction response is 1-indexed *[1-n]* referencing an arbitrary collection of targets/classes.
+The value provided in a prediction response is 0-indexed *[0-n]* referencing an arbitrary collection of targets/classes.
+
+**[Markers are indexed differently.](./markers.md#objectclass-indexing)**

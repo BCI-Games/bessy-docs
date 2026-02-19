@@ -22,7 +22,7 @@ OutStream.PushMIClassificationMarker(1, 1.5f);
 `PushString` can also be used to send a raw marker directly, outside of the defined types.
 
 ## Object/Class Indexing
-Provided marker classes and write methods are 0-indexed in regards to objects/classes, and will *"translate"* to the 1-indexed markers and response python back-end expects. This *"translation"* has to be done manually if working with raw marker strings.
+Provided marker classes and write methods are 0-indexed in regards to objects/classes, and will *"translate"* to the [1-indexed markers and response expected by a back end](../../framework/markers.md#objectclass-indexing). This *"translation"* has to be done manually if working with raw marker strings.
 
 
 [marker-api-status]: ../../framework/markers.md#status-markers
