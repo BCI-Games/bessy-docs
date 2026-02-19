@@ -1,12 +1,12 @@
 ---
 weight: 1
 ---
-BCI Essentials uses [Lab Streaming Layer (LSL)](https://labstreaminglayer.org/) to interchange time synchronized EEG data, presentation markers, and classification responses. A stream with type: `LSL_Marker_Strings` sends [markers](markers) from the front end. Another with type: `BCI` sends [responses](responses) from the back end. Messages are formatted as comma-delimited strings.
+BCI Essentials uses [Lab Streaming Layer (LSL)](https://labstreaminglayer.org/) to interchange time synchronized EEG data, presentation markers, and classification responses. A stream with type: `BCI_Essentials_Markers` sends [markers](markers) from the front end. Another with type: `BCI_Essentials_Predictions` sends [predictions](responses#predictions) from the back end. Messages are formatted as comma-delimited strings.
 
 | Stream Type | Content |
 | -- | -- |
-| `LSL_Marker_Strings` | [markers](markers) |
-| `BCI` | [responses](responses) |
+| `BCI_Essentials_Markers` | [Data Markers](markers) |
+| `BCI_Essentials_Predictions` | [Classifier Inferences](responses#predictions) |
 
 ## Timeline Definitions
 {{<description-list>}}
