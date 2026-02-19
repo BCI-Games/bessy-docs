@@ -1,12 +1,17 @@
-BCI Essentials provides a single type of meaningful response: predictions. A receipt is also provided for each marker sent, along with periodic pings.
-| Format | Description
+A BCI Essentials back end provides a single type of meaningful response: predictions. The index of the most likely class or stimulus item inferred by the classifier is provided along with a confidence ratio for every possibility *(though certain back ends may also provide only a single confidence ratio)*.
+
+| Format | Example |
 | --- | --- |
-| `[#]` | Prediction sent in response to an epoch marker with no train target (`-1`) or the end of a trial as relevant to the paradigm used |
-| `ping` | Sent periodically to test and keep the LSL connection alive |
-| `marker received: ...` | Confirmation of receipt for a [status](#status-markers) or [event](#event-markers) marker |
+| `{index}:{confidence}` | `5:0.81` |
+| `{index}:[{probabilities}...]` | `1:[0.52 0.47 0.01]` |
+| `ping` | ping |
+
+*For continuous trial paradigms such as SSVEP and Motor Imagery, a back end may send predictions at the end of every [Epoch](./_index.md#timeline-definitions) or at the end of a [Trial](./_index.md#timeline-definitions). In the later case, class probabilities and the resulting prediction are averaged over the constituent epochs.*
 
 ## Predictions
-Classification results are sent as a single number enclosed in braces indicating the class or object index selected as relevant to the trial context when there is no training target (`-1`). Different paradigms will send predictions at different intervals:
+**Classification results are sent following the end of a trial or epoch when no training target is indicated by the relevant [event markers](./markers.md#event-markers); a training target of `-1`.**
+
+Different paradigms will send predictions at different intervals:
 | Paradigm | When to Expect a Prediction |
 | --- | --- |
 | P300 | End of Trial |
