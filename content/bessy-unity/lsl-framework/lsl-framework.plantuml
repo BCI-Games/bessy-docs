@@ -6,29 +6,30 @@ end title
 
 namespace LSLFramework {
     class LSLStreamReader {
-        string StreamType {"BCI"}
-        {Serialized} bool _openOnStart
+        string StreamType = "BCI_Essentials_Predictions"
         bool PrintLogs
+        ..serialized fields..
+        - bool _openOnStart
         ..properties..
         int SamplesAvailable
         bool HasLiveInlet
         --
         void OpenStream()
         void CloseStream()
-        LSLResponse[] PullAllResponses()
+        Response[] PullAllResponses()
     }
 
-    class LSLResponseProvider extends LSLStreamReader {
+    class ResponseProvider extends LSLStreamReader {
         float PollingPeriod
         ..properties..
         bool IsPolling
         --
-        void SubscribePredictions(Action<LSLPredictionResponse>)
-        void SubscribeAll(Action<LSLResponse>)
-        void Subscribe<T : LSLResponse>(Action<T>)
-        bool UnsubscribePredictions(Action<LSLPredictionResponse>)
-        bool UnsubscribeAll(Action<LSLResponse>)
-        bool Unsubscribe<T : LSLResponse>(Action<T>)
+        void SubscribePredictions(Action<Prediction>)
+        void SubscribeAll(Action<Response>)
+        void Subscribe<T : Response>(Action<T>)
+        bool UnsubscribePredictions(Action<Prediction>)
+        bool UnsubscribeAll(Action<Response>)
+        bool Unsubscribe<T : Response>(Action<T>)
     }
 
     note bottom
@@ -39,8 +40,8 @@ namespace LSLFramework {
 
 
     class LSLStreamWriter {
-        string StreamName {"UnityMarkerStream"}
-        string StreamType {"LSL_Marker_Strings"}
+        string StreamName = "UnityMarkerStream"
+        string StreamType = "BCI_Essentials_Markers"
         bool PrintLogs
         ..properties..
         bool HasConsumers
@@ -50,7 +51,7 @@ namespace LSLFramework {
         void PushString(string)
     }
 
-    class LSLMarkerWriter extends LSLStreamWriter {
+    class MarkerWriter extends LSLStreamWriter {
         status markers
         ..
         void PushTrialStartedMarker()
@@ -58,7 +59,7 @@ namespace LSLFramework {
         void PushTrainingCompleteMarker()
         void PushTrainClassifierMarker()
         void PushUpdateClassifierMarker()
-        void PushDontWithRestingStateCollectionMarker()
+        void PushDoneWithRestingStateCollectionMarker()
         void PushStatusMarker<T : IStatusMarker>()
         --
         event markers
@@ -66,21 +67,15 @@ namespace LSLFramework {
         void PushMITrainingMarker(...)
         void PushMIClassificationMarker(...)
         ..
-        void PushSwitchTrainingMarker(...)
-        void PushSwitchClassificationMarker(...)
-        ..
         void PushSSVEPTrainingMarker(...)
         void PushSSVEPClassificationMarker(...)
-        ..
-        void PushTVEPTrainingMarker(...)
-        void PushTVEPClassificationMarker(...)
         ..
         void PushSingleFlashP300TrainingMarker(...)
         void PushSingleFlashP300ClassificationMarker(...)
         void PushMultiFlashP300TrainingMarker(...)
         void PushMultiFlashP300ClassificationMarker(...)
         --
-        void PushMarker(ILSLMarker)
+        void PushMarker(IMarker)
     }
 
 
@@ -97,15 +92,15 @@ namespace LSLFramework {
     }
 
 
-    interface ILSLMarker {
+    interface IMarker {
         string MarkerString
     }
 
-    interface IStatusMarker extends ILSLMarker
+    interface IStatusMarker extends IMarker
 
     circle "...Specialized Status Markers" as status_markers implements IStatusMarker
 
-    abstract EventMarker implements ILSLMarker {
+    abstract EventMarker implements IMarker {
         int ObjectCount
         int TrainingTarget
     }
@@ -114,13 +109,10 @@ namespace LSLFramework {
         float EpochLength
     }
     class MIEventMarker extends EpochEventMarker
-    class SwitchEventMarker extends EpochEventMarker
 
-    abstract FrequenciesEventMarker extends EpochEventMarker {
+    class SSVEPEventMarker extends EpochEventMarker {
         float[] Frequencies
     }
-    class SSVEPEventMarker extends FrequenciesEventMarker
-    class TVEPEventMarker extends FrequenciesEventMarker
 
     abstract P300EventMarker extends EventMarker
     class SingleFlashP300EventMarker extends P300EventMarker {
@@ -131,32 +123,40 @@ namespace LSLFramework {
     }
 
 
-    class LSLPredictionResponse extends SingleChannelLSLResponse {
-        int Value
+    class Prediction extends SingleChannelResponse {
+        int Index
+        float[] Probabilities
     }
-    note bottom of LSLPredictionResponse: The only useful response
+    note bottom of Prediction: The only useful response
 
-    class LSLResponse {
+    class CompositePrediction extends Prediction
+    {
+        Prediction[] Parts
+    }
+    CompositePrediction *-- Prediction
+
+
+    class Response {
         double CaptureTime
         string[] RawSampleValues
-        {static} LSLResponse BuildResponse(string[], double)
+        {static} Response BuildResponse(string[], double)
         string ToString()
         bool TryMatchRegex(...)
     }
-    class EmptyLSLResponse extends LSLResponse
+    class EmptyResponse extends Response
 
-    class SingleChannelLSLResponse extends LSLResponse {
-        {static} LSLResponse Parse(string)
+    class SingleChannelResponse extends Response {
+        {static} Response Parse(string)
     }
-    class LSLPing extends SingleChannelLSLResponse
+    class LSLPing extends SingleChannelResponse
 
-    class LSLMarkerReceipt extends SingleChannelLSLResponse
+    class LSLMarkerReceipt extends SingleChannelResponse
 }
 
 
-LSLMarkerWriter --> ILSLMarker
-LSLStreamReader --> LSLResponse
+MarkerWriter --> IMarker
+LSLStreamReader --> Response
 LSLStreamReader --> LSLStreamResolver
-LSLResponseProvider --> LSLPredictionResponse
+ResponseProvider --> Prediction
 
 @enduml
