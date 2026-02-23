@@ -10,13 +10,13 @@ Provides the baseline logical flow to run a single training trial on a given tar
 - Start Target Indication
   - *End Transitory Target Indication*
 - Start Stimulus Trial
-- *Indicate Target Selection*
 - *End Persistent Target Indication*
 
 ### Target Indication Behaviour
-Implements indication of the target stimulus presenter or state of a training trial. A [`StimulusPresenterCollection`](../../stimulus/collections/) is a target indication behaviour, passing indication responsibility to its [`StimulusPresentationBehaviour`](../../stimulus/presentation/)s.
+Implements indication of the target stimulus presenter or state of a training trial.
 
-A target indication behaviour must also be able to receive selections, which may be used during training to provide sham feedback as practice for the user. This action(s) triggered by a selection are arbitrary.
+#### Stimulus Presenter Collection Target Indicator
+Provides a simple way to invoke the target indication behaviour of the [Stimulus Presenters](../../stimulus/presentation/) of a [Collection](../../stimulus/collections/).
 
 ---
 ## Automated Training Behaviour

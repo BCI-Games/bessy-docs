@@ -25,6 +25,6 @@ BCI Essentials Unity can be added to any [Unity project through git using the bu
 ## Standard Setup Checklist
 - [ ] BCI Controller *+ Shortcuts*
 - [ ] Trial Behaviour
-- [ ] Training Behaviour
+- [ ] Training Behaviour *+ Target Indicator*
 - [ ] Stimulus Presenters
 - [ ] Selector *+ Shortcuts*

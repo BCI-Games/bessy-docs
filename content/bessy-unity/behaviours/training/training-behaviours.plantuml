@@ -2,13 +2,6 @@
 !theme plain
 title Training Behaviours
 
-namespace Selection {
-    interface ISelector {
-        void MakeSelection(int)
-    }
-    abstract SelectionBehaviour implements ISelector
-}
-
 namespace Behaviours {
     circle CoroutineBehaviour
 
@@ -23,9 +16,8 @@ namespace Behaviours {
 
 namespace Behaviours.Training {
     abstract TrainingBehaviour extends Behaviours.CoroutineBehaviour implements Behaviours.IBCIMarkerSource
-    abstract TargetIndicationBehaviour extends .Selection.SelectionBehaviour {
+    abstract TargetIndicationBehaviour {
         {abstract} int OptionCount
-        {abstract} void MakeSelection(int)
         {abstract} void BeginTargetIndication(int)
         {abstract} void EndTargetIndication()
     }
@@ -45,8 +37,6 @@ namespace Behaviours.Training {
         float PreTrialTime
         float PostTrialTime
         bool SelectTrainingTarget
-        float TargetSelectionDisplayPeriod
-        float RestTime
         IEnumerator RunRound(int)
     }
     SingleRoundTrainingBehaviour --> TargetIndicationBehaviour
@@ -54,6 +44,7 @@ namespace Behaviours.Training {
 
     class AutomatedTrainingBehaviour extends SingleRoundTrainingBehaviour {
         int SelectionCount
+        float RestTime
     }
 
     class IterativeTrainingBehaviour extends AutomatedTrainingBehaviour {
