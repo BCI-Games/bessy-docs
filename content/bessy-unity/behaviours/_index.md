@@ -16,10 +16,10 @@ Also serves as a `CommunicationComponentProvider`.
 Simplifies the establishment of system communication. On `Awake()`, core [LSL framework](../lsl-framework/) classes will be found or created, then provided to any components on the same game object *(or it's children)* which implement designated "communication-user" interfaces.
 
 ### I Marker Source
-Implemented by classes needing to send markers to the back end using an `LSLMarkerWriter`. Reference will be assigned directly by a parent or sibling `CommunicationComponentProvider`.
+Implemented by classes needing to send markers to the back end using an `MarkerWriter`. Reference will be assigned directly by a parent or sibling `CommunicationComponentProvider`.
 
-### I Selector
-Implemented by classes who make selections, whose relevant method will be hooked into predictions by a parent or sibling `CommunicationComponentProvider`.
+### I Prediction Sink
+Implemented by classes using predictions, whose relevant method will be hooked into predictions by a parent or sibling `CommunicationComponentProvider`.
 
 See [Selection](../selection/) for more details.
 
