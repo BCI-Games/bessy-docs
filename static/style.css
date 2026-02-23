@@ -9,14 +9,14 @@ html {
     @media (prefers-color-scheme: light) {
         --main-colour: #000;
         --bg-colour: #fff;
-        --accent-colour: #44f;
-        --secondary-accent-colour: #518;
+        --link-colour: #44f;
+        --visited-link-colour: #518;
     }
     @media (prefers-color-scheme: dark) {
         --main-colour: #fff;
         --bg-colour: #222;
-        --accent-colour: #bbf;
-        --secondary-accent-colour: #97a;
+        --link-colour: #bbf;
+        --visited-link-colour: #97a;
     }
 
     color: var(--main-colour);
@@ -81,6 +81,13 @@ body main {
 }
 
 
+:target {
+    background-color: var(--main-colour);
+    color: var(--bg-colour);
+    padding: 1ch;
+}
+
+
 img {
     display: block;
     max-width: 100%;
@@ -89,8 +96,8 @@ img {
 figure { margin-inline: 0 }
 figcaption { text-align: center }
 
-a { color: var(--accent-colour) }
-:visited { color: var(--secondary-accent-colour) }
+a { color: var(--link-colour) }
+:visited { color: var(--visited-link-colour) }
 
 ul { padding-left: 2ch }
 li { margin-block: 0.5em }
