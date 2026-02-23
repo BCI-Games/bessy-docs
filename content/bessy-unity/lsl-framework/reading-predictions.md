@@ -1,31 +1,31 @@
-Though the python back end will provide [a number responses][responses], only predictions from the classifier are meaningful. Two levels of a stream reader class are provided. In most cases, the `LSLResponseProvider` should be the most helpful. Adding this component to a Unity scene will allow you to subscribe to response callbacks by [type][responses], dynamically opening and polling an inlet, providing parsed responses. Incoming responses will be provided to all subscribers but are not otherwise be saved. This means that any incoming responses not relevant to any active subscriber will be discarded upon reception.
+Though the python back end will provide [a number responses][responses], only predictions from the classifier are meaningful. Two levels of a stream reader class are provided. In most cases, the `ResponseProvider` should be the most helpful. Adding this component to a Unity scene will allow you to subscribe to response callbacks by [type][responses], dynamically opening and polling an inlet, providing parsed responses. Incoming responses will be provided to all subscribers but are not otherwise be saved. This means that any incoming responses not relevant to any active subscriber will be discarded upon reception.
 ```cs
 using BCIEssentials.LSLFramework;
 
-LSLResponseProvider InStream = GetComponent<LSLResponseProvider>();
+ResponseProvider InStream = GetComponent<ResponseProvider>();
 
-void OnPredictionReceived(LSLPredictionResponse prediction)
+void OnPredictionReceived(Prediction prediction)
 {
-    Debug.Log($"Prediction received for object #{prediction.Value}");
+    Debug.Log($"Prediction received for object #{prediction.Index}");
 }
 
 InStream.SubscribePredictions(OnPredictionReceived);
 // or
-InStream.Subscribe<LSLPredictionResponse>(OnPredictionReceived);
+InStream.Subscribe<Prediction>(OnPredictionReceived);
 // or
 InStream.SubscribePredictions(prediction => {
-    Debug.Log($"Prediction received for object #{prediction.Value}");
+    Debug.Log($"Prediction received for object #{prediction.Index}");
 }
 // or
 InStream.SubscribeAll(response => {
-    if (response is LSLPredictionResponse prediction) {
-        Debug.Log($"Prediction received for object #{prediction.Value}");
+    if (response is Prediction prediction) {
+        Debug.Log($"Prediction received for object #{prediction.Index}");
     }
 }
 // or
 InStream.Subscribe<SingleChannelLSLResponse>(response => {
-    if (response is LSLPredictionResponse prediction) {
-        Debug.Log($"Prediction received for object #{prediction.Value}");
+    if (response is Prediction prediction) {
+        Debug.Log($"Prediction received for object #{prediction.Index}");
     }
 }
 
@@ -41,11 +41,12 @@ The basic `LSLStreamReader` can also be used to manually pull typed responses if
 ## Response Types
 | Type | Description |
 | --- | --- |
-| `LSLResponse` | Base class for all responses, *indicates parsing failure if not a more specific type* |
-| `EmptyLSLResponse` | LSL sample with no content |
+| `Prediction` | Prediction from the classifier indicating the selection of a specific object |
+| `CompositePrediction` | A response consisting of multiple predictions |
+| `LSLPing` | Meaningless *(sent to test the connection and keep it alive)* |
 | `SingleChannelLSLResponse` | Base class for all expected responses, *indicates parsing failure if not a more specific type* |
-| `LSLPing` | "ping" |
-| `LSLPrediction` | Prediction from the classifier indicating the selection of a specific object |
+| `LSLResponse` | Base class for all responses, *indicates parsing failure if not a more specific type* |
+| `EmptyLSLResponse` | LSL sample with no content, *won't be logged or broadcast by response provider* |
 
 
 [responses]: ../../framework/responses.md

@@ -1,8 +1,8 @@
-BCI Essentials is controlled using marker strings sent as LSL samples, which come in two broad types: [Status Markers][marker-api-status] and [Event Markers][marker-api-event]. The `LSLMarkerWriter` component and related types are provided to streamline this process and improve clarity by explicitly defining the supported set of markers. To use it yourself, simply add the component to a unity scene and use any of the public `Push..Marker` methods using a Marker class or an explicit helper overload:
+BCI Essentials is controlled using marker strings sent as LSL samples, which come in two broad types: [Status Markers][marker-api-status] and [Event Markers][marker-api-event]. The `MarkerWriter` component and related types are provided to streamline this process and improve clarity by explicitly defining the supported set of markers. To use it yourself, simply add the component to a unity scene and use any of the public `Push..Marker` methods using a Marker class or an explicit helper overload:
 ```cs
 using BCIEssentials.LSLFramework;
 
-LSLMarkerWriter OutStream = GetComponent<LSLMarkerWriter>();
+MarkerWriter OutStream = GetComponent<MarkerWriter>();
 
 OutStream.PushTrialStartedMarker();
 // or
