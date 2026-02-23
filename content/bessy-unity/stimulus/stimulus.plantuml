@@ -4,45 +4,13 @@ title
 Stimulus Classes
 end title
 
-namespace Selection {
-    interface ISelectable {
-        bool IsSelectable
-        void Select()
-    }
-
-    abstract SelectionBehaviour implements ISelector {
-        void MakeSelection(int)
-    }
-    SelectionBehaviour::MakeSelection .> ISelectable::Select
-}
-
-namespace Behaviours.Training {
-    abstract TargetIndicationBehaviour extends .Selection.SelectionBehaviour {
-        {abstract} int OptionCount
-        {abstract} void BeginTargetIndication(int)
-        {abstract} void EndTargetIndication()
-    }
-
-    interface ITargetable {
-        void StartTargetIndication()
-        void EndTargetIndication()
-    }
-    TargetIndicationBehaviour::BeginTargetIndication .l.> ITargetable::StartTargetIndication
-    TargetIndicationBehaviour::EndTargetIndication .l.> ITargetable::EndTargetIndication
-}
-
-Behaviours -l[hidden]- Selection
-
 namespace Stimulus {
     namespace Collections {
-        class StimulusPresenterCollection extends Behaviours.Training.TargetIndicationBehaviour {
-            int OptionCount
+        class StimulusPresenterCollection {
+            List<StimulusPresentationBehaviour> LatestSubset
             ..serialized fields..
             # List<StimulusPresentationBehaviour> _stimulusPresenters
             --
-            void makeSelection(int)
-            void BeginTargetIndication(int)
-            void EndTargetIndication()
             StimulusPresentationBehaviour this[int]
             List<StimulusPresentationBehaviour> GetSelectable()
             List<StimulusPresentationBehaviour> GetVisible()
@@ -76,7 +44,7 @@ namespace Stimulus {
     }
 
     namespace Presentation {
-        abstract StimulusPresentationBehaviour implements .Selection.ISelectable, .Behaviours.Training.ITargetable {
+        abstract StimulusPresentationBehaviour {
             bool IsSelectable
             {abstract} void StartStimulusDisplay()
             {abstract} void EndStimulusDisplay()
@@ -142,9 +110,9 @@ namespace Stimulus {
 
     Presentation.StimulusPresentationBehaviour -o Collections.StimulusPresenterCollection::_stimulusPresenters
 
-    Collections.StimulusPresenterCollection::makeSelection --> Presentation.StimulusPresentationBehaviour::Select
-    Collections.StimulusPresenterCollection::BeginTargetIndication --> Presentation.StimulusPresentationBehaviour::StartTargetIndication
-    Collections.StimulusPresenterCollection::EndTargetIndication --> Presentation.StimulusPresentationBehaviour::EndTargetIndication
+    Collections.StimulusPresenterCollection::makeSelection ..> Presentation.StimulusPresentationBehaviour::Select
+    Collections.StimulusPresenterCollection::BeginTargetIndication ..> Presentation.StimulusPresentationBehaviour::StartTargetIndication
+    Collections.StimulusPresenterCollection::EndTargetIndication ..> Presentation.StimulusPresentationBehaviour::EndTargetIndication
 }
 
 @enduml

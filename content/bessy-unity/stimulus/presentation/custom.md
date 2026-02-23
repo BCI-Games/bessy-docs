@@ -14,7 +14,7 @@ It is important to consider how your presenter(s) will be used. [P300 trial beha
 ### Selection
 The `Select` method can be used to directly trigger application logic or simply to indicate selection. In either case, multiple components can receive and act on predictions from the back end.
 
-When referenced by a [stimulus presenter collection](../collections/) serviced by a [communication component provider](../../behaviours/_index.md#communication-component-provider), selections will be automatically triggered by predictions from the back end.
+When contained by a [stimulus presenter collection](../collections/) referenced by a [presenter collection selector](../../selection/_index.md#stimulus-presenter-collection-selector) serviced by a [communication component provider](../../behaviours/_index.md#communication-component-provider), selections will be automatically triggered by predictions from the back end.
 
 See [Selection](../../selection/) for more details.
 
