@@ -3,11 +3,12 @@
 title Selection
 
 namespace Selection {
-    interface ISelector {
-        void MakeSelection(int)
+    interface IPredictionSink {
+        void OnPrediction(Prediction)
     }
+    IPredictionSink::OnPrediction --> .LSLFramework.Prediction
 
-    abstract SelectionBehaviour implements ISelector
+    abstract SelectionBehaviour implements IPredictionSink
 
     interface ISelectable {
         bool IsSelectable
@@ -20,6 +21,14 @@ namespace Selection {
         - SelectionBehaviour _target
         - TrialBehaviour _trialBehaviour
     }
+    SelectionBehaviour -o SelectorShortcuts::_target
+
+    class StimulusPresenterCollectionSelector extends SelectionBehaviour {
+        - StimulusPresenterCollection _target
+    }
+    StimulusPresenterCollectionSelector::_target -> .Stimulus.Collections.StimulusPresenterCollection
+    StimulusPresenterCollectionSelector ..> ISelectable::Select
+    StimulusPresenterCollection o. ISelectable
 
     note as Note
         A brief collection of structural skeletons
