@@ -25,7 +25,7 @@ namespace Behaviours {
         UpdateClassifier()
     }
 
-    namespace Trialing {
+    namespace Trials {
         abstract TrialBehaviour {
             # int? TrainingTarget
             void StartTestingTrial()

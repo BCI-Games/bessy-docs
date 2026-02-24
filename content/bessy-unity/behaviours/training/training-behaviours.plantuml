@@ -9,7 +9,7 @@ namespace Behaviours {
         LSLMarkerWriter MarkerWriter
     }
 
-    namespace Trialing {
+    namespace Trials {
         circle TrialBehaviour
     }
 }
@@ -40,7 +40,7 @@ namespace Behaviours.Training {
         IEnumerator RunRound(int)
     }
     SingleRoundTrainingBehaviour --> TargetIndicationBehaviour
-    SingleRoundTrainingBehaviour --> .Behaviours.Trialing.TrialBehaviour
+    SingleRoundTrainingBehaviour --> .Behaviours.Trials.TrialBehaviour
 
     class AutomatedTrainingBehaviour extends SingleRoundTrainingBehaviour {
         int SelectionCount

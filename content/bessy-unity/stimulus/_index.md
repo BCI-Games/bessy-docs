@@ -1,7 +1,7 @@
 ---
 weight: 3
 ---
-The `Stimulus` namespace includes a number of classes used in the presentation of stimulus as coordinated by a [trial behaviour](../behaviours/trialing/).
+The `Stimulus` namespace includes a number of classes used in the presentation of stimulus as coordinated by a [trial behaviour](../behaviours/trials/).
 
 [Presenters](./presentation/) are *ideally* dumb components used by trial behaviours to display stimulus.  
 However, they may also implement selection and target indication logic.

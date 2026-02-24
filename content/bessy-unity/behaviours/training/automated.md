@@ -4,7 +4,7 @@ title: Automated Training Behaviour
 A number of provided components implement conventional training sequences especially relevant to stimulus presentation paradigms. Training for [motor imagery](../../../framework/paradigms.md#motor-imagery) or other paradigms targetting an abstract state would likely be best implemented by a [custom training behaviour](./_index.md#custom-sequences).
 
 ## Single Round Training Behaviour
-Provides the baseline logical flow to run a single training trial on a given target, configurable in the Unity inspector. Requires a reference to a `TargetIndicationBehaviour` as well as a [`TrialBehaviour`](../trialing/).
+Provides the baseline logical flow to run a single training trial on a given target, configurable in the Unity inspector. Requires a reference to a `TargetIndicationBehaviour` as well as a [`TrialBehaviour`](../trials/).
 
 ### Logical Flow
 - Start Target Indication

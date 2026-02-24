@@ -9,7 +9,7 @@ A [motor imagery](../../../framework/paradigms.md#motor-imagery) training behavi
 Though any matter of sequence may be implemented by a custom training behaviour, the following abstract sequence provides a rough framework.
 - Run Training "Round"
     - Choose + [Indicate Target](./automated.md#target-indication-behaviour)
-    - [Mark Training Epoch](../../../framework/markers.md#status-markers) or [Run Stimulus Trial](../trialing/)
+    - [Mark Training Epoch](../../../framework/markers.md#status-markers) or [Run Stimulus Trial](../trials/)
 - Repeat until Sufficient Training Data
 - [Indicate Training Completion](../../../framework/markers.md#status-markers)
 

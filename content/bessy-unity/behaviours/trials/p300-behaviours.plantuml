@@ -22,7 +22,7 @@ namespace Utilities {
     context --> arrays
 }
 
-namespace Behaviours.Trialing.P300 {
+namespace Behaviours.Trials.P300 {
     abstract P300TrialBehaviour {
         StimulusPresenterCollection PresenterCollection
         int FlashesPerOption

@@ -13,7 +13,7 @@ namespace Behaviours {
         LSLMarkerWriter MarkerWriter
     }
 
-    namespace Trialing {
+    namespace Trials {
         abstract TrialBehaviour extends .Behaviours.CoroutineBehaviour implements .Behaviours.IBCIMarkerSource {
             bool HasTrainingTarget
             void StartTestingTrial()
@@ -40,7 +40,7 @@ namespace Behaviours {
         TrialBehaviour <|-- custom
 
         namespace P300 {
-            abstract P300TrialBehaviour extends .Behaviours.Trialing.TrialBehaviour {
+            abstract P300TrialBehaviour extends .Behaviours.Trials.TrialBehaviour {
                 StimulusPresenterCollection PresenterCollection
                 int FlashesPerOption
                 float OnTime

@@ -16,9 +16,9 @@ namespace Behaviours {
         targetting ..> .Stimulus.Collections.StimulusPresenterCollection
     }
 
-    namespace Trialing {
-        circle "Trial Behaviours" as trialing
-        trialing ..> .Stimulus.Collections.StimulusPresenterCollection
+    namespace Trials {
+        circle "Trial Behaviours" as trials
+        trials ..> .Stimulus.Collections.StimulusPresenterCollection
     }
 }
 

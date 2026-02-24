@@ -1,7 +1,7 @@
 ---
 weight: 2
 ---
-The recommended "high-level" implementation of a BCI Essentials front end is provided by a suite of Monobehaviour scripts. Stimulus [trials](./trialing/) and the [Training](./training/) routines which use them are implemented as discrete components, easily replaced or extended with alternative implementations.
+The recommended "high-level" implementation of a BCI Essentials front end is provided by a suite of Monobehaviour scripts. Stimulus [trials](./trials/) and the [Training](./training/) routines which use them are implemented as discrete components, easily replaced or extended with alternative implementations.
 
 
 {{<figure-link src="./behaviours.svg" alt="Diagram of core package behaviour classes">}}

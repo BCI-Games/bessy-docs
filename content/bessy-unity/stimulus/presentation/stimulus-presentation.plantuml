@@ -14,9 +14,9 @@ namespace Behaviours {
         targetting ..> .Stimulus.Presentation.StimulusPresentationBehaviour
     }
 
-    namespace Trialing {
-        circle "Trial Behaviours" as trialing
-        trialing ..> .Stimulus.Presentation.StimulusPresentationBehaviour
+    namespace Trials {
+        circle "Trial Behaviours" as trials
+        trials ..> .Stimulus.Presentation.StimulusPresentationBehaviour
     }
 }
 
