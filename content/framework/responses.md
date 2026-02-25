@@ -2,7 +2,7 @@ A BCI Essentials back end provides a single type of meaningful response: predict
 
 | Format | Example |
 | --- | --- |
-| `{index}:[{probabilities}...],...` | `1:[0.52 0.47 0.01]` |
+| `{label}:[{probabilities}...],...` | `1:[0.52 0.47 0.01]` |
 | `ping` | ping |
 
 *Pings may be sent to test the connection and keep it alive.*
@@ -19,11 +19,11 @@ Predictions are sent at different intervals for different paradigms:
 
 *For paradigms with arbitrary trial periods such as SSVEP and Motor Imagery, a back end may send predictions at the end of every [Epoch](./_index.md#timeline-definitions) or at the end of a [Trial](./_index.md#timeline-definitions). In the later case, comma-delimited predictions for each constituent epoch will be listed in one message.*
 
-`1:[0.2853 0.7147],0:[0.8230 0.1770],1:[0.4573 0.5427],0:[0.9358 0.0642]`
+`2:[0.2853 0.7147],1:[0.8230 0.1770],2:[0.4573 0.5427],1:[0.9358 0.0642]`
 
 *It is recommended to use the most recent result*
 
-### Object/Class Indexing
-The value provided in a prediction response is 0-indexed *[0-n]* referencing an arbitrary collection of targets/classes.
+### Label Indexing
+The value provided in a prediction response is 1-indexed *[1-n]* referencing an arbitrary collection of targets/classes.
 
-**[Markers are indexed differently.](./markers.md#objectclass-indexing)**
+**[Markers are also 1-indexed.](./markers.md#target-indexing)**

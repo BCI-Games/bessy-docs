@@ -1,4 +1,5 @@
 Though the python back end will provide [a number responses][responses], only predictions from the classifier are meaningful. Two levels of a stream reader class are provided. In most cases, the `ResponseProvider` should be the most helpful. Adding this component to a Unity scene will allow you to subscribe to response callbacks by [type][responses], dynamically opening and polling an inlet, providing parsed responses. Incoming responses will be provided to all subscribers but are not otherwise be saved. This means that any incoming responses not relevant to any active subscriber will be discarded upon reception.
+
 ```cs
 using BCIEssentials.LSLFramework;
 
@@ -36,6 +37,7 @@ InStream.UsubscribePredictions(OnPredictionReceived);
 // This enables the safe use of lambdas regardless of component lifetimes,
 // but they cannot be unsubscribed manually unless a reference is stored somewhere.
 ```
+
 The basic `LSLStreamReader` can also be used to manually pull typed responses if desired.
 
 ## Response Types
@@ -47,6 +49,9 @@ The basic `LSLStreamReader` can also be used to manually pull typed responses if
 | `SingleChannelLSLResponse` | Base class for all expected responses, *indicates parsing failure if not a more specific type* |
 | `LSLResponse` | Base class for all responses, *indicates parsing failure if not a more specific type* |
 | `EmptyLSLResponse` | LSL sample with no content, *won't be logged or broadcast by response provider* |
+
+## Prediction Indexing
+The `Index` field of `Prediction` objects is 0-indexed **[0-n)**, *"translated"* from the [1-indexed labels of the raw string message](../../framework/responses.md#label-indexing).
 
 
 [responses]: ../../framework/responses.md

@@ -39,7 +39,7 @@ Certain markers indicate that associated data should be used in *building* a cla
 | ...frequencies | Spread list of stimulus objects frequencies |
 | stimulus index | Index/Indices of object(s) presenting stimulus |
 
-#### Object/Class Indexing
+#### Target Indexing
 All fields referencing the "index" of an object or class are 1-indexed with regards to an arbitrary collection of said options. Specifically, the `target` field should be in the range: *[1-n]*, along with each of the indices of active stimulus objects listed in a p300 event marker.
 
-**[Predictions are indexed differently.](./responses.md#objectclass-indexing)**
+**[Predictions are also 1-indexed.](./responses.md#label-indexing)**
