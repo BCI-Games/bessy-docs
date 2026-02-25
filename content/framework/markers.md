@@ -21,10 +21,10 @@ The primary data driver and communication structure used by BCI Essentials are p
 
 | Format | Example | Description |
 | --- | --- | --- |
-| `mi,{count},{target},{length}` | `mi,1,0,2.5` | start of Motor Imagery epoch |
-| `ssvep,{count},{target},{length},{...frequencies}` | `ssvep,4,2,1.5,12.5,18.7,24.4,30.1` | start of SSVEP epoch |
-| `p300,s,{count},{target},{active}` | `p300,s,8,3,1` | Instance of stimulus presentation for a specific object, triggered as part of a flashing routine |
-| `p300,m,{count},{target},{...active}` | `p300,m,8,3,1,3,5,7` | Instance of stimulus presentation for multiple objects simultaneously, triggered as part of a flashing routine |
+| `mi,{classes},{target},{length}` | `mi,1,0,2.5` | start of Motor Imagery epoch |
+| `ssvep,{classes},{target},{length},{...frequencies}` | `ssvep,4,2,1.5,12.5,18.7,24.4,30.1` | start of SSVEP epoch |
+| `p300,s,{classes},{target},{stimulus index}` | `p300,s,8,3,1` | Instance of stimulus presentation for a specific object, triggered as part of a flashing routine |
+| `p300,m,{classes},{target},{...stimulus indices}` | `p300,m,8,3,1,3,5,7` | Instance of stimulus presentation for multiple objects simultaneously, triggered as part of a flashing routine |
 
 ### Training vs Classification Markers
 Certain markers indicate that associated data should be used in *building* a classifier while other markers indicate that associated data should be evaluated *using* a classifier. This distinction is indicated by the specification of a training target.  
@@ -33,11 +33,11 @@ Certain markers indicate that associated data should be used in *building* a cla
 ### Marker Parameters
 | Name | Description |
 | --- | --- |
-| count | Number of selectable stimulus-presenting objects |
+| classes | Number of classes *(states of stimulus presenters)* |
 | target | Index of intended selection target in the training sequence: **`-1` For Predictions** *(not training)* |
-| length | Time length in seconds of training or classification epoch|
+| length | Length of training or classification epoch in seconds, should be at least 1-2s |
 | ...frequencies | Spread list of stimulus objects frequencies |
-| active | Index/Indices of object(s) presenting stimulus |
+| stimulus index | Index/Indices of object(s) presenting stimulus |
 
 #### Object/Class Indexing
 All fields referencing the "index" of an object or class are 1-indexed with regards to an arbitrary collection of said options. Specifically, the `target` field should be in the range: *[1-n]*, along with each of the indices of active stimulus objects listed in a p300 event marker.
