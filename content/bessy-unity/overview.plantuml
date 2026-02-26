@@ -3,7 +3,7 @@
 title Essential Class Overview
 
 
-interface Selection.ISelector {
+interface Selection.IPredictionSink {
     void MakeSelection(int)
 }
 
@@ -40,7 +40,7 @@ namespace Behaviours {
 
     BCIController --> TrialBehaviour
     BCIController --> TrainingBehaviour
-    CommunicationComponentProvider .> ISelector
+    CommunicationComponentProvider .> IPredictionSink
 }
 
 namespace LSLFramework {

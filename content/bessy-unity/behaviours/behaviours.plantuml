@@ -3,7 +3,7 @@
 title Core Behaviour Classes
 
 together {
-    interface Selection.ISelector {
+    interface Selection.IPredictionSink {
         void MakeSelection(int)
     }
 
@@ -38,10 +38,10 @@ namespace Behaviours {
     note top
         Fetches or creates LSL framework components,
         providing them to any children implementing
-        the IBCIMarkerSource or ISelector interfaces
+        the IBCIMarkerSource or IPredictionSink interfaces
     end note
     CommunicationComponentProvider ..> IBCIMarkerSource::MarkerWriter
-    CommunicationComponentProvider ..> ISelector::MakeSelection
+    CommunicationComponentProvider ..> IPredictionSink::MakeSelection
 
     class BCIController extends CommunicationComponentProvider {
         bool IsRunningTrial
