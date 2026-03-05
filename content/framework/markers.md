@@ -35,7 +35,7 @@ Certain markers indicate that associated data should be used in *building* a cla
 | --- | --- |
 | classes | Number of classes *(states of stimulus presenters)* |
 | target | Index of intended selection target in the training sequence: **`-1` For Predictions** *(not training)* |
-| length | Length of training or classification epoch in seconds, should be at least 1-2s |
+| length | Length of training or classification epoch in seconds (>1-2s), **must remain constant between markers** |
 | ...frequencies | Spread list of stimulus objects frequencies |
 | stimulus index | Index/Indices of object(s) presenting stimulus |
 

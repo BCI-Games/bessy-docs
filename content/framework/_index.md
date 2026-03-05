@@ -23,7 +23,7 @@ BCI Essentials uses [Lab Streaming Layer (LSL)](https://labstreaminglayer.org/) 
 ---
 
 - An **Epoch** must contain enough data to meaningfully classify; at least 1-2 seconds
-- All training **Epochs** must have the same length
+- All training and classification **Epochs** must have the same length
 - **Epochs** may overlap
 - A **Trial** is demarcated by [event markers](./markers.md#event-markers)
   - P300 **Trials** contain multiple "flashing" stimulus events
