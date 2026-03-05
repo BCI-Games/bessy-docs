@@ -69,7 +69,13 @@ Now that you have Miniconda installed, you can create a new Conda environment na
 4. Now, you can install packages and run Python scripts within the "bessy" environment without affecting your system-wide Python installation.
 
 ## Step 4: Install BCI Essentials Python
-To use the latest version, you must first clone the project repository:
+```sh
+pip install bci-essentials
+```
+If any `pip` packages fail to install, try installing them manually using conda (e.g., `conda install mne-lsl`).
+
+### Editable Installation
+*A latest "unstable" version can also be installed as a local package from the repository directly:*
 ```sh
 git clone https://github.com/kirtonBCIlab/bci-essentials-python
 ```
@@ -79,13 +85,6 @@ cd bci-essentials-python
 conda activate bessy
 pip install -e .
 ```
-
-An outdated BCI Essentials library can also be installed with pip. This may take a few minutes.
-```bash
-pip install bci-essentials
-```
-
-If any `pip` packages fail to install, try installing them manually using conda (e.g., `conda install mne-lsl`).
 
 ## Step 5: Celebrate!!
 That's it! You have successfully installed Miniconda and created a Conda environment named "bessy" with Python 3.9. You have filled this environment with all the dependencies required to run BCI Essentials on your computer! You can now work within this environment for your Python projects without interfering with other installations on your computer. Remember to activate the environment whenever you want to work in it and deactivate it when you're done.

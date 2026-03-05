@@ -6,6 +6,11 @@ external_link: https://github.com/kirtonBCIlab/bci-essentials-python
 ---
 BCI Essentials python is a library built to process and classify EEG data [marked](../framework/markers.md) by a BCI Essentials front end. Modules are designed to be equivalent whether run with live data or a recording.
 
+BCI Essentials requires Python 3.9 or later. To install for Windows, MacOS or Linux:
+```sh
+pip install bci-essentials
+```
+
 More detailed instructions on installing BCI-Essentials-Python (such as setting up a virtual environment in `conda`) can be found [here](./installation.md).
 
 ## As a Back End
