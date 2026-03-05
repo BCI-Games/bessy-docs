@@ -14,13 +14,17 @@ pip install bci-essentials
 More detailed instructions on installing BCI-Essentials-Python (such as setting up a virtual environment in `conda`) can be found [here](./installation.md).
 
 ## As a Back End
-For most application developers, the back ends implemented in example scripts will be most useful. Running any of these will provide a functional back end for a BCI Essentials front end. Both an EEG and Marker stream are required.
+For most application developers, the back ends implemented in [example scripts](https://github.com/kirtonBCIlab/bci-essentials-python/tree/main/examples) will be most useful. Running any of these will provide a functional back end for a BCI Essentials front end. Both an EEG and Marker stream are required.
+
+After downloading the example script:
 ```sh
-python examples/mi_unity_backend.py
+python mi_unity_backend.py
 ```
 
 ## Simulating an EEG Stream
-You may not always have access to live eeg data with which to test. As a convenient alternative, you can run the `eeg_lsl_sim` script to open and run a stream of dummy LSL data.
+***Depends on data files located in the github repository.***
+
+You may not always have access to live eeg data with which to test. As a convenient alternative, you can run the `eeg_lsl_sim` script to open and run a stream of dummy LSL data. 
 ```sh
 python examples/eeg_lsl_sim.py [paradigm] [-n]
 ```
