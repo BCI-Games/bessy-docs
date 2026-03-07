@@ -6,7 +6,7 @@ Miniconda is a lightweight version of Anaconda, a popular package manager and en
 1. Go to the [Miniconda website](https://docs.conda.io/en/latest/miniconda.html)
 2. Download the appropriate installer for your operating system (Windows, macOS, or Linux).
    * *For **macOS**, choose the version appropriate for your chipset (macOS Intel x86 or macOS Apple M series). **To determine your chipset**, go to "About this Mac". The information will be listed beside "Chip".*
-3. Choose the installer for Python 3.9 or later.
+3. Choose the installer for Python 3.10 or later.
 
 
 ## Step 2: Install Miniconda
@@ -51,14 +51,14 @@ Once you have downloaded the Miniconda installer, follow these steps to install 
 8. Close and reopen your terminal to use the newly installed Miniconda.
 
 ## Step 3: Create a Conda environment
-Now that you have Miniconda installed, you can create a new Conda environment named "bessy" using Python 3.9:
+Now that you have Miniconda installed, you can create a new Conda environment named "bessy" using Python 3.10:
 
 1. Open a terminal or command prompt.
-2. Create the "bessy" environment with Python >3.9:
+2. Create the "bessy" environment with Python >3.10:
    ```bash
-   conda create -n bessy
+   conda create -n bessy python=3.10
    ```
-   This command creates a new environment named "bessy" (-n flag) and installs Python version 3.9 in it.
+   This command creates a new environment named "bessy" (-n flag) and installs Python version 3.10 in it.
 
    Note: If this step fails, it is likely that miniconda was not added correctly to your PATH. If this is the case, there are many online tutorials showing "How to add miniconda to PATH", you can alternatively run these commands from the Anaconda Prompt if you don't want to add miniconda to PATH.
 3. Activate the "bessy" environment:
@@ -87,7 +87,7 @@ pip install -e .
 ```
 
 ## Step 5: Celebrate!!
-That's it! You have successfully installed Miniconda and created a Conda environment named "bessy" with Python 3.9. You have filled this environment with all the dependencies required to run BCI Essentials on your computer! You can now work within this environment for your Python projects without interfering with other installations on your computer. Remember to activate the environment whenever you want to work in it and deactivate it when you're done.
+That's it! You have successfully installed Miniconda and created a Conda environment named "bessy" with Python 3.10. You have filled this environment with all the dependencies required to run BCI Essentials on your computer! You can now work within this environment for your Python projects without interfering with other installations on your computer. Remember to activate the environment whenever you want to work in it and deactivate it when you're done.
 
 ## Deactivating your Conda Environment
 To deactivate the "bessy" environment and return to your base environment, simply run:
