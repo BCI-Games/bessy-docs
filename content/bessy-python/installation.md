@@ -54,9 +54,9 @@ Once you have downloaded the Miniconda installer, follow these steps to install 
 Now that you have Miniconda installed, you can create a new Conda environment named "bessy" using Python 3.9:
 
 1. Open a terminal or command prompt.
-2. Create the "bessy" environment with Python 3.9:
+2. Create the "bessy" environment with Python >3.9:
    ```bash
-   conda create -n bessy python=3.9
+   conda create -n bessy
    ```
    This command creates a new environment named "bessy" (-n flag) and installs Python version 3.9 in it.
 
