@@ -5,114 +5,106 @@ Stimulus Classes
 end title
 
 namespace Stimulus {
-    namespace Collections {
-        class StimulusPresenterCollection {
-            List<StimulusPresentationBehaviour> LatestSubset
-            ..serialized fields..
-            # List<StimulusPresentationBehaviour> _stimulusPresenters
-            --
-            StimulusPresentationBehaviour this[int]
-            List<StimulusPresentationBehaviour> GetSelectable()
-            List<StimulusPresentationBehaviour> GetVisible()
-            List<StimulusPresentationBehaviour> GetVisibleAndSelectable()
-            --
-            int Count
-            void Clear()
-            void Add(StimulusPresentationBehaviour)
-            void Remove(StimulusPresentationBehaviour)
-            bool Contains(StimulusPresentationBehaviour)
-            void CopyTo(StimulusPresentationBehaviour[], int)
-            IEnumerator GetEnumerator()
-        }
-
-        class DynamicStimulusPresenterCollection extends StimulusPresenterCollection {
-            SearchMethod PopulationMethod { Type | Tag }
-            Scope PopulationScope { Scene | Children | ChildrenOfParent }
-            string PresenterTag {"BCI"}
-            void Repopulate()
-            List<StimulusPresentationBehaviour> GetSelectable()
-            List<StimulusPresentationBehaviour> GetVisible()
-        }
-
-        circle "Presenter List Extensions" as list_ext
-        circle "Presenter Search Extensions" as search_ext
-        circle "Stimulus Presenter Collection Enumerator" as enumerator
-
-        StimulusPresenterCollection --> list_ext
-        StimulusPresenterCollection --> enumerator
-        DynamicStimulusPresenterCollection --> search_ext
+    class StimulusPresenterCollection {
+        List<StimulusPresenter> LatestSubset
+        ..serialized fields..
+        # List<StimulusPresenter> _stimulusPresenters
+        --
+        StimulusPresenter this[int]
+        List<StimulusPresenter> GetSelectable()
+        List<StimulusPresenter> GetVisible()
+        List<StimulusPresenter> GetVisibleAndSelectable()
+        --
+        int Count
+        void Clear()
+        void Add(StimulusPresenter)
+        void Remove(StimulusPresenter)
+        bool Contains(StimulusPresenter)
+        void CopyTo(StimulusPresenter[], int)
+        IEnumerator GetEnumerator()
     }
 
-    namespace Presentation {
-        abstract StimulusPresentationBehaviour {
-            bool IsSelectable
-            {abstract} void StartStimulusDisplay()
-            {abstract} void EndStimulusDisplay()
-            {abstract} void Select()
-            {abstract} void StartTargetIndication()
-            {abstract} void EndTargetIndication()
-        }
+    class DynamicStimulusPresenterCollection extends StimulusPresenterCollection {
+        SearchMethod PopulationMethod { Type | Tag }
+        Scope PopulationScope { Scene | Children | ChildrenOfParent }
+        string PresenterTag {"BCI"}
+        bool RepopulateWhenQueried
+        void Repopulate()
+        List<StimulusPresenter> GetSelectable()
+        List<StimulusPresenter> GetVisible()
+    }
+    
+    StimulusPresenterCollection::_stimulusPresenters o- StimulusPresenter
 
-        abstract CoroutineStimulusPresenter extends StimulusPresentationBehaviour
-        {
-            {abstract} IEnumerator RunStimulusDisplay()
-            {abstract} IEnumerator RunStimulusCleanup()
-            {abstract} IEnumerator RunSelection()
-            {abstract} IEnumerator RunTargetIndication()
-            {abstract} IEnumerator RunTargetIndicationCleanup()
-        }
+' ---
 
-        class UnityEventStimulusPresenter extends StimulusPresentationBehaviour {
-            UnityEvent OnStimulusDisplayTriggered
-            UnityEvent OnStimulusDisplayEnded
-            UnityEvent OnSelected
-            UnityEvent OnTargeted
-            UnityEvent OnTargettingEnded
-        }
-
-        namespace Standard {
-            class ColourFlashBehaviour {
-                bool IsFlashing
-                Color OnColour
-                Color OffColour
-                float TargetIndicationFlashPeriod
-                float TargetIndicationFlashCount
-                SelectionFlashPeriod
-                SelectionFlashCount
-                ..serialized fields..
-                - Renderer _renderer
-                --
-                void StartSelectionIndication()
-                void StopSelectionIndication()
-                void StartTargetIndication()
-                void EndStartedIndication()
-                void SetColour(Color)
-            }
-
-            class ColourToggleStimulusPresenter extends .Stimulus.Presentation.StimulusPresentationBehaviour {
-                void ToggleRendererColour(bool)
-            }
-            ColourToggleStimulusPresenter --> ColourFlashBehaviour
-
-            abstract FrequencyStimulusPresenter extends ColourToggleStimulusPresenter
-
-            class TimeCycleFrequencyStimulusPresenter extends FrequencyStimulusPresenter {
-                float Frequency
-                void SetFrequency(float)
-            }
-            class FrameCycleFrequencyStimulusPresenter extends FrequencyStimulusPresenter {
-                int FramesOn
-                int FramesOff
-                float CalculateNominalFrequency(float)
-            }
-        }
+    abstract StimulusPresenter {
+        bool IsSelectable
+        {abstract} void StartStimulusDisplay()
+        {abstract} void EndStimulusDisplay()
+        {abstract} void Select()
+        {abstract} void StartTargetIndication()
+        {abstract} void EndTargetIndication()
     }
 
-    Presentation.StimulusPresentationBehaviour -o Collections.StimulusPresenterCollection::_stimulusPresenters
+    abstract CoroutineStimulusPresenter extends StimulusPresenter
+    {
+        {abstract} IEnumerator RunStimulusDisplay()
+        {abstract} IEnumerator RunStimulusCleanup()
+        {abstract} IEnumerator RunSelection()
+        {abstract} IEnumerator RunTargetIndication()
+        {abstract} IEnumerator RunTargetIndicationCleanup()
+    }
 
-    Collections.StimulusPresenterCollection::makeSelection ..> Presentation.StimulusPresentationBehaviour::Select
-    Collections.StimulusPresenterCollection::BeginTargetIndication ..> Presentation.StimulusPresentationBehaviour::StartTargetIndication
-    Collections.StimulusPresenterCollection::EndTargetIndication ..> Presentation.StimulusPresentationBehaviour::EndTargetIndication
+    class UnityEventStimulusPresenter extends StimulusPresenter {
+        UnityEvent OnStimulusDisplayTriggered
+        UnityEvent OnStimulusDisplayEnded
+        UnityEvent OnSelected
+        UnityEvent OnTargeted
+        UnityEvent OnTargettingEnded
+    }
+
+' ---
+
+    class ColourFlashDisplay {
+        bool IsFlashing
+        Renderer Renderer
+        Color OnColour
+        Color OffColour
+        ..target indication..
+        float TargetIndicationFlashPeriod
+        float TargetIndicationFlashCount
+        ..selection indication..
+        SelectionFlashPeriod
+        SelectionFlashCount
+        ---
+        void StartSelectionIndication()
+        void StopSelectionIndication()
+        void StartTargetIndication()
+        void EndStartedIndication()
+        ..
+        void DisplayOnColour()
+        void DisplayOffColour()
+        void ToggleDisplayState(bool)
+        void SetColour(Color)
+    }
+
+    class DutyCycleEngine {
+        float Frequency
+        float DutyCycle
+        bool StateFlag
+        bool IsRunning
+        ---
+        void StartCycle()
+        void StopCycle()
+    }
+
+
+    class ColourToggleStimulusPresenter extends StimulusPresenter
+    ColourToggleStimulusPresenter o- ColourFlashDisplay
+
+    class FrequencyStimulusPresenter extends ColourToggleStimulusPresenter
+    FrequencyStimulusPresenter o- DutyCycleEngine
 }
 
 @enduml
