@@ -3,45 +3,21 @@
 title Essential Class Overview
 
 
-interface Selection.IPredictionSink {
-    void MakeSelection(int)
+abstract class BCICommandCentre
+
+
+abstract TrialConductor {
+    # int? TrainingTarget
+    void StartTestingTrial()
+    void StartTrainingTrial()
+    void ClearTrainingTarget()
 }
 
-namespace Stimulus.Presentation {
-    circle "Stimulus Presenters" as presenters
-}
+class AutomatedTrainingConductor
 
+BCICommandCentre o- TrialConductor
+BCICommandCentre o-- AutomatedTrainingConductor
 
-namespace Behaviours {
-    class BCIController extends CommunicationComponentProvider {
-        StartTrial()
-        InterruptTrial()
-        StartTraining()
-        InterruptTraining()
-    }
-
-    class CommunicationComponentProvider {
-        # ProvideCommunicationComponentsToChildren()
-        UpdateClassifier()
-    }
-
-    namespace Trials {
-        abstract TrialBehaviour {
-            # int? TrainingTarget
-            void StartTestingTrial()
-            void StartTrainingTrial()
-            void ClearTrainingTarget()
-        }
-    }
-
-    namespace Training {
-        abstract TrainingBehaviour
-    }
-
-    BCIController --> TrialBehaviour
-    BCIController --> TrainingBehaviour
-    CommunicationComponentProvider .> IPredictionSink
-}
 
 namespace LSLFramework {
     class LSLMarkerWriter {
@@ -64,13 +40,18 @@ namespace LSLFramework {
     }
 }
 
-CommunicationComponentProvider o-- LSLMarkerWriter
-CommunicationComponentProvider o-- LSLResponseProvider
+BCICommandCentre o-- LSLMarkerWriter
+BCICommandCentre o-- LSLResponseProvider
 
-TrialBehaviour --> LSLMarkerWriter
-TrainingBehaviour --> LSLMarkerWriter
-TrialBehaviour <. TrainingBehaviour
+TrialConductor --> LSLMarkerWriter
+AutomatedTrainingConductor --> LSLMarkerWriter
+TrialConductor <.. AutomatedTrainingConductor
 
-TrialBehaviour ..> presenters
+
+namespace Stimulus {
+    circle "Stimulus Presenters" as presenters
+}
+
+TrialConductor ..> presenters
 
 @enduml
