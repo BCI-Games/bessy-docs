@@ -1,0 +1,43 @@
+@startuml training-conductors
+!theme plain
+title Training Conductors
+
+
+circle CoroutineWrapper
+
+interface IBCIMarkerSource {
+    LSLMarkerWriter MarkerWriter
+}
+
+interface ITargetIndicator {
+    {abstract} int OptionCount
+    {abstract} void BeginTargetIndication(int)
+    {abstract} void EndTargetIndication()
+}
+interface ITargetable {
+    void StartTargetIndication()
+    void EndTargetIndication()
+}
+ITargetIndicator::BeginTargetIndication .> ITargetable::StartTargetIndication
+
+
+class SingleRoundTrainingConductor extends CoroutineWrapper implements IBCIMarkerSource {
+    int TargetIndex
+    float TargetIndicationPeriod
+    bool PersistTargetIndication
+    float PreTrialTime
+    float PostTrialTime
+    bool SelectTrainingTarget
+    IEnumerator RunRound(int)
+}
+SingleRoundTrainingConductor --> ITargetIndicator
+SingleRoundTrainingConductor -> TrialConductor
+
+class AutomatedTrainingConductor extends SingleRoundTrainingConductor {
+    int SelectionCount
+    float RestTime
+}
+
+AutomatedTrainingConductor .[hidden]r. ITargetIndicator
+
+@enduml
