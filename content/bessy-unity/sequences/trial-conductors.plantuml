@@ -1,0 +1,55 @@
+@startuml trial-conductors
+!theme plain
+title Trial Conductors
+
+
+circle CoroutineWrapper
+
+interface IBCIMarkerSource {
+    LSLMarkerWriter MarkerWriter
+}
+
+
+abstract TrialConductor extends CoroutineWrapper implements IBCIMarkerSource {
+    bool HasTrainingTarget
+    void StartTestingTrial()
+    void StartTrainingTrial(int)
+    void ClearTrainingTarget()
+}
+
+abstract PersistentTrialConductor extends TrialConductor {
+    int TrainingEpochCount
+    float EpochLength
+    float InterEpochInterval
+    {abstract} void SendTrainingMarker(int)
+    {abstract} void SendClassificationMarker()
+}
+
+class SSVEPTrialConductor extends PersistentTrialConductor {
+    List<FrequencyStimulusPresenter> Presenters
+}
+
+
+circle "Custom Trial Conductors" as custom
+TrialConductor <|-- custom
+
+
+class P300TrialConductor extends TrialConductor {
+    FlashingPattern pattern
+    int FlashesPerOption
+    float OnTime
+    float OffTime
+    ..
+    int Rows
+    int Columns
+    ..
+    DynamicStimulusPresenterCollection
+}
+note top
+Uses static P300 trial routines:
+Random, Context Aware,
+Row-Column, Checkerboard,
+and Context Aware Groups
+end note
+
+@enduml
